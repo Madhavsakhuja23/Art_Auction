@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <link rel="stylesheet" href="login.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="outer" class="fade-in">
+    <p id="cross"><a href="home.html">&cross;</a></p>
+    <h2>Login</h2>
+    <div id="chk"></div>
+    <form onsubmit="return frm_chk(event)" method="post">
+      <input type="email" name="email" id="email" placeholder="Email" required />
+      <input type="password" name="pwd" id="pwd" placeholder="Password" required />
+      <input type="submit" value="Login"/> <span><a href="forgot.html">Forgot your password?</a></span>
+      <p class="signin-link">Don't have an account? <a href="signup.html">Sign up</a></p>
+    </form>
+  </div>
+  <script>
+    let se = localStorage.getItem("email");
+    let sp = localStorage.getItem("password");
+    let sfn = localStorage.getItem("Firstname");
+    function frm_chk(event) {
+      event.preventDefault(); 
+      let le = document.getElementById("email").value;
+      let lp = document.getElementById("pwd").value;
+      if (le === se && lp === sp) {
+        sessionStorage.setItem("Firstname", sfn);
+        window.location.href="home.html";
+        return true;
+      }
+      else{
+         document.getElementById("chk").style.display = "block";
+        document.getElementById("chk").innerHTML="Enter the valid details";
+        document.getElementById("chk").style.color = "#4b3f33"; 
+        return false;
+      }
+    }
+  </script>
+</body>
+</html>

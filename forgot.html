@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Password Change</title>
+  <link rel="stylesheet" href="settings.css" />
+</head>
+
+<body>
+  <div class="settings-container">
+    <h1>Password Reset</h1>
+    <form id="settingsForm" onsubmit="return pwd_check()">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email" required />
+      <div id="emailexist" style="color:red;"></div>
+
+      <input type="password" name="pwd" id="pwd" placeholder="New Password" required />
+      <div id="pwdcriteria" style="display:none;"></div>
+
+      <input type="password" name="cpwd" id="cpwd" placeholder="Confirm Password" required />
+
+      <button type="submit">Save my details</button>
+    </form>
+  </div>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("email").value = localStorage.getItem("email") || "";
+    });
+
+    function pwd_check() {
+      const savedEmail = localStorage.getItem("email");
+      const enteredEmail = document.getElementById("email").value;
+      const emailexist = document.getElementById("emailexist");
+      const pwd = document.getElementById("pwd").value;
+      const cpwd = document.getElementById("cpwd").value;
+      const feedback = document.getElementById("pwdcriteria");
+
+      // Reset feedback visibility and messages
+      feedback.style.display = "block";
+      emailexist.textContent = "";
+      feedback.textContent = "";
+
+      // Check if email matches
+      if (savedEmail !== enteredEmail) {
+        emailexist.textContent = "❌ No account with this email.";
+        return false;
+      }
+
+      // Password length
+      if (pwd.length < 10) {
+        feedback.textContent = "⚠ Password must be at least 10 characters long.";
+        feedback.style.color = "#d9534f";
+        return false;
+      }
+
+      // Uppercase and number check
+      if (!/[A-Z]/.test(pwd) || !/\d/.test(pwd)) {
+        feedback.textContent = "⚠ Password must include an uppercase letter and a number.";
+        feedback.style.color = "#d9534f";
+        return false;
+      }
+
+      // Confirm match
+      if (pwd !== cpwd) {
+        feedback.textContent = "⚠ Passwords do not match.";
+        feedback.style.color = "#d9534f";
+        return false;
+      }
+
+      // ✅ All OK
+      feedback.textContent = "✅ Password is strong and matches.";
+      feedback.style.color = "green";
+
+      // Save password (demo only, insecure)
+      localStorage.setItem("password", pwd);
+
+      // Redirect to home
+      setTimeout(() => {
+        window.location.href = "home.html";
+      }, 1000); // delay so user sees message
+
+      return false; // prevent form from submitting the default way
+    }
+  </script>
+</body>
+</html>

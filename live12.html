@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Artwork Bidding Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* GENERAL STYLING */
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #f5efe6;
+      color: #4b3f33;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+    }
+
+    /* LAYOUT */
+    .first-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .left-column {
+      flex: 1;
+      max-width: 700px;
+    }
+
+    .right-column {
+      flex: 1;
+      max-width: 500px;
+    }
+
+    /* IMAGE PREVIEW */
+    .art-preview {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .art-preview img {
+      width: 100%;
+      height: 700px;
+      transform-origin: center center;
+      transition: transform 0.2s ease;
+      pointer-events: none;
+      display: block;
+    }
+
+    .art-preview::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      right: 0; bottom: 0;
+      cursor: zoom-in;
+    }
+
+    /* UNIFIED INFO CARD */
+    .info-card {
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .info-section {
+      border-bottom: 1px solid #e0dcd5;
+      padding-bottom: 0.2rem;
+    }
+
+    .info-section:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .info-section h3 {
+      margin-bottom: 0.8rem;
+      color: #4b3f33;
+    }
+
+    .timer {
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: center;
+      color: #7a6448;
+    }
+
+    .artist-flex {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .artist-flex img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* SECOND SECTION */
+    .second-section {
+      max-width: 1200px;
+      margin: 2rem auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .section {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px #5a4632 ;
+    }
+
+    .section h3 {
+      margin-bottom: 1rem;
+    }
+
+    input[type="number"],
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 0.7rem 1.4rem;
+      background-color: #8b6f47;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color:  #5a4632;
+    }
+
+    button.clicked {
+      transform: scale(1.05);
+      background-color: #a67c52 !important;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+ .back-link {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.back-link a {
+  color: #6e4b2c;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.back-link a:hover {
+  color: #a67c52;
+}
+
+    /* RESPONSIVENESS */
+    @media (max-width: 768px) {
+      .first-section {
+        flex-direction: column;
+      }
+
+      .artist-flex {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .artist-flex img {
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h1>"Whispers of the Wind"</h1>
+
+<!-- SECTION 1: IMAGE LEFT, INFO RIGHT -->
+<div class="first-section">
+  <div class="left-column">
+    <div class="art-preview">
+      <img src="images/live12.jpg" alt="Artwork Image" />
+    </div>
+  </div>
+
+  <div class="right-column">
+    <div class="info-card">
+      <div class="info-section timer">
+        Auction ends in: <span id="countdown">02:15:30</span>
+      </div>
+
+      <div class="info-section">
+        <h3>Bidding Guidelines</h3>
+        <ul>
+          <li>Minimum bid increment: $50</li>
+          <li>Bidding closes at the time shown on the timer</li>
+          <li>Winners will be notified via registered email</li>
+        </ul>
+      </div>
+
+      <div class="info-section artist">
+        <h3>Artist Info</h3>
+        <div class="artist-flex">
+          <img src="artist.jpg" alt="Artist Profile Picture">
+          <div>
+            <p><strong>Name:</strong> Ava Rodriguez</p>
+            <p><strong>Exhibitions:</strong> Latin American Art Fair 2022, Serenity in Canvas 2023</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-section bids">
+        <h3>Top 3 Bids</h3>
+        <ul>
+          <li><strong>@artlvr89</strong> — $2,450 <em>(1 min ago)</em></li>
+          <li><strong>@sunsetbrush</strong> — $2,300 <em>(10 min ago)</em></li>
+          <li><strong>@canvasqueen</strong> — $2,200 <em>(20 min ago)</em></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2: FULL WIDTH -->
+<div class="second-section">
+  <div class="section description">
+    <h3>About the Art</h3>
+    <p>
+      A serene portrayal of nature’s unseen motion.<br>
+      The wind’s passage through tall grass made visible through brushstrokes.<br>
+      Invites viewers to pause and breathe with the landscape.
+    </p>
+  </div>
+
+  <div class="section message-artist">
+    <h3>Message the Artist</h3>
+    <input type="text" placeholder="Subject " maxlength="50">
+    <textarea placeholder="Ask the artist about their work (max 300 characters)" maxlength="300"></textarea>
+    <button>Send Message</button>
+  </div>
+
+  <div class="section place-bid">
+    <h3>Place Your Bid</h3>
+    <input type="number" placeholder="Enter bid amount" min="2451" required />
+    <button>Submit Bid</button>
+  </div>
+
+  
+  <div class="back-link">
+      <a href="auctions.html">← Back to Auctions</a>
+    </div>
+</div>
+
+<!-- SCRIPT: ZOOM + COUNTDOWN + BUTTON ANIMATION -->
+<script>
+  // Zoom effect
+  const preview = document.querySelector('.art-preview');
+  const img = preview.querySelector('img');
+
+  preview.addEventListener('mousemove', function(e) {
+    const rect = preview.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const xPercent = x / rect.width * 100;
+    const yPercent = y / rect.height * 100;
+    img.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+  });
+
+  preview.addEventListener('mouseleave', () => {
+    img.style.transformOrigin = 'center center';
+    img.style.transform = 'scale(1)';
+  });
+
+  preview.addEventListener('mouseenter', () => {
+    img.style.transform = 'scale(2)';
+  });
+
+  // Countdown Timer
+  const countdownEl = document.getElementById("countdown");
+  const auctionEnd = new Date().getTime() + (60 * 60 * 1000); // 1 hour
+
+  const updateCountdown = setInterval(() => {
+    const now = new Date().getTime();
+    const diff = auctionEnd - now;
+
+    if (diff <= 0) {
+      clearInterval(updateCountdown);
+      countdownEl.textContent = "Auction Closed";
+      countdownEl.style.color = "#c0392b";
+      return;
+    }
+
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    countdownEl.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  }, 1000);
+
+  // Button Animation
+  function animateButton(button) {
+    button.classList.add("clicked");
+    setTimeout(() => {
+      button.classList.remove("clicked");
+    }, 600);
+  }
+
+  document.querySelector(".place-bid button").addEventListener("click", function() {
+    animateButton(this);
+  });
+
+  document.querySelector(".message-artist button").addEventListener("click", function() {
+    animateButton(this);
+  });
+</script>
+
+</body>
+</html>

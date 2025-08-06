@@ -1,0 +1,121 @@
+/* Reset and Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Manrope', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5efe6;
+  color: #4b3f33;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Page load animation */
+.fade-in {
+  animation: fadeIn 1s ease-in-out forwards;
+  opacity: 0;
+}
+@keyframes fadeIn {
+  0% { transform: translateY(50px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Login Container */
+#outer {
+  position: relative;
+  background-color: #d2c3b3;
+  padding: 40px;
+  border-radius: 16px;
+  width: 400px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#outer:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+#cross {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+  font-weight: bold;
+}
+#cross a{
+  text-decoration: none;
+  
+}
+/* Heading */
+h2 {
+  text-align: center;
+  color: #3a322b;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+input[type="email"],
+input[type="password"] {
+  padding: 14px;
+  border: 1.5px solid #d6c4b2;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 1rem;
+  background-color: #fdfaf6;
+  color: #4b3f33;
+  outline: none;
+  transition: 0.3s;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #4b3f33;
+  background-color: #fff;
+}
+
+/* Submit Button */
+input[type="submit"] {
+  background-color: #4b3f33;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+input[type="submit"]:hover {
+  background-color: #3a322b;
+}
+
+/* Sign-in link */
+.signin-link {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.95rem;
+}
+
+.signin-link a {
+  color:#12100e;
+  font-weight: 500;
+}
+#chk{
+  display: none;
+}

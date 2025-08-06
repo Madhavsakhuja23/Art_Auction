@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Settings</title>
+  <link rel="stylesheet" href="settings.css" />
+</head>
+<body>
+  <div class="settings-container">
+    <h1>Settings</h1>
+    <form id="settingsForm">
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Enter your name" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email" required />
+      <input type="password" id="pwdc" placeholder="Current Password" required />
+      <div id="pwd-error" style="display: none;"></div>
+      <input type="password" id="pwd" placeholder="New Password" required />
+      <div id="pwdchk" style="display: none;"></div>
+      <input type="password" id="cpwd" placeholder="Confirm Password" required />
+      <button type="submit">Save & Go to Home</button>
+    </form>
+  </div>
+
+  <script>
+    function pwd_check() {
+      const pwd = document.getElementById("pwd").value;
+      const cpwd = document.getElementById("cpwd").value;
+      const feedback = document.getElementById("pwdchk");
+
+      feedback.style.display = "block";
+      // feedback.style.padding = "8px";
+      // feedback.style.borderRadius = "6px";
+      // feedback.style.fontSize = "14px";
+      feedback.style.backgroundColor = "transparent";
+
+
+      if (pwd.length < 10) {
+        feedback.innerHTML = "⚠ Password must be at least 10 characters long.";
+        feedback.style.color = "#ffd4d4";
+        return false;
+      }
+      const hasUpperCase = /[A-Z]/.test(pwd);
+      const hasNumber = /\d/.test(pwd);
+
+      if (!hasUpperCase || !hasNumber) {
+        feedback.innerHTML = " Password must include a uppercase and a number.";
+        feedback.style.color = " #ffd4d4";
+        return false;
+      }
+
+
+      if (pwd !== cpwd) {
+        feedback.innerHTML = "Passwords do not match.";
+        feedback.style.color = "#ffd4d4";
+        return false;
+      }
+
+      feedback.innerHTML = "Password is strong and matches.";
+      feedback.style.color = "green";
+      return true;
+
+
+    }
+    // Load existing data
+    window.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("name").value = sessionStorage.getItem("Firstname") || "";
+      document.getElementById("email").value = localStorage.getItem("email") || "";
+    });
+
+    // Save updated settings
+    document.getElementById("settingsForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const pwdcls=localStorage.getItem("password");
+      if(pwdcls!=document.getElementById("pwdc").value){
+        document.getElementById("pwd-error").innerText="Enter The correct password";
+        document.getElementById("pwd-error").style.display="inline";
+        return false;
+      }
+      if(pwd_check()){
+      sessionStorage.setItem("Firstname", name);
+      localStorage.setItem("email", email);
+      localStorage.setItem("password", document.getElementById("pwd").value);
+      // Redirect to home
+      window.location.href = "home.html";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register</title>
+  <link rel="stylesheet" href="sign_up.css" />
+</head>
+
+<body>
+  <div id="outer" class="fade-in">
+    <p id="cross"><a href="home.html">&cross;</a></p>
+    <h2>Register</h2>
+    <form onsubmit="return handle_submit()" method="post">
+      <input type="text" name="Fn" id="fn" placeholder="First Name" required />
+      <div id="name_criteria"></div>
+      <input type="text" name="ln" id="ln" placeholder="Last Name" required />
+      <input type="email" name="email" id="email" placeholder="Email" required />
+      <div id="email_criteria"></div>
+      <input type="text" name="phone_no" id="phone_no" placeholder="Phone Number" required minlength="10"
+        maxlength="10" />
+      <input type="password" name="pwd" id="pwd" placeholder="Password" required />
+      <div id="pwdcriteria"></div>
+      <input type="password" name="cpwd" id="cpwd" placeholder="Confirm Password" required />
+      <input type="submit" value="Register" />
+      <p class="login-link">Already have an account? <a href="login.html">Login</a></p>
+    </form>
+  </div>
+
+  <script>
+    function pwd_check() {
+      const pwd = document.getElementById("pwd").value;
+      const cpwd = document.getElementById("cpwd").value;
+      const feedback = document.getElementById("pwdcriteria");
+
+      feedback.style.display = "block";
+      // feedback.style.padding = "8px";
+      // feedback.style.borderRadius = "6px";
+      // feedback.style.fontSize = "14px";
+      feedback.style.backgroundColor = "transparent";
+
+
+      if (pwd.length < 10) {
+        feedback.innerHTML = "⚠ Password must be at least 10 characters long.";
+        feedback.style.color = "#ffd4d4";
+        return false;
+      }
+      const hasUpperCase = /[A-Z]/.test(pwd);
+      const hasNumber = /\d/.test(pwd);
+
+      if (!hasUpperCase || !hasNumber) {
+        feedback.innerHTML = " Password must include a uppercase and a number.";
+        feedback.style.color = " #ffd4d4";
+        return false;
+      }
+
+
+      if (pwd !== cpwd) {
+        feedback.innerHTML = "Passwords do not match.";
+        feedback.style.color = "#ffd4d4";
+        return false;
+      }
+
+      feedback.innerHTML = "Password is strong and matches.";
+      feedback.style.color = "green";
+      return true;
+
+
+    }
+    function isValidEmail(email) {
+      const regex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com)$/;
+      let le=localStorage.getItem("email");
+      if (!regex.test(email)) {
+        document.getElementById("email_criteria").style.display = "block";
+        document.getElementById("email_criteria").innerText = "⚠ Email must end with @gmail.com or @yahoo.com.";
+      }
+      if(le===document.getElementById("email").value){
+    document.getElementById("email_criteria").innerText="Already have an Existing Account with this Email.";
+    document.getElementById("email_criteria").style.display = "block";
+    return false;
+  }
+      return regex.test(email);
+    }
+    function user() {
+      let first_name = document.getElementById("fn").value.trim();
+      const hasUpperCase = /[A-Z]/.test(first_name);
+      const hasLower = /[a-z]/.test(first_name);
+      if (!hasUpperCase && !hasLower) {
+        document.getElementById("name_criteria").style.display = "block";
+        document.getElementById("name_criteria")
+          .innerText = "⚠ Name must contain both uppercase and lowercase letters."
+        return false;
+      }
+      return true;
+    }
+    function handle_submit() {
+    const pwdValid = pwd_check();
+    const emailValid = isValidEmail(document.getElementById("email").value);
+    const userValid = user();
+
+    if (pwdValid && emailValid && userValid) {
+      // Save to storage and redirect
+      localStorage.setItem("email", document.getElementById("email").value);
+      localStorage.setItem("password", document.getElementById("pwd").value);
+      localStorage.setItem("Firstname", document.getElementById("fn").value);
+      window.location.href = "login.html";
+      // return true;
+    }
+
+    return false; // stop form submission if any check fails
+  }
+  </script>
+</body>
+
+</html>

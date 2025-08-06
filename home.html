@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Collect Art & Design Online</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">Aurtistiq</div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Collect</a></li>
+      <li><a href="auctions.html">Auctions</a></li>
+      <li id="Signin"><a href="signup.html">Sign In</a></li>
+      <li id="username"></li>
+    </ul>
+    <div class="dropdown-content" id="dropdown">
+        <a href="profile.html" style="text-decoration: none;">👤 View Profile</a>
+        <a href="settings.html">⚙️ Settings</a>
+        <a href="home.html" id="logout">🚪 Log Out</a>
+    </div>
+  </nav>
+  <!-- Filter Sidebar -->
+<div id="filterSidebar" class="filter-sidebar">
+  <button id="closeSidebar">&times;</button>
+  <h2>Filters</h2>
+
+    <div class="filter-search">
+  <span class="search-icon">&#128269;</span>
+  <input type="text" placeholder="Search by keyword…">
+</div>
+
+  <div class="filter-group">
+    <h3>Price</h3>
+    <label><input type="checkbox"> Under $1,000</label><br>
+    <label><input type="checkbox"> $1,000 - $5,000</label><br>
+    <label><input type="checkbox"> $5,000+</label>
+  </div>
+
+  <div class="filter-group">
+    <h3>Size</h3>
+    <label><input type="checkbox"> Small</label><br>
+    <label><input type="checkbox"> Medium</label><br>
+    <label><input type="checkbox"> Large</label>
+  </div>
+
+  <div class="filter-group">
+    <h3>Artist Nationality</h3>
+    <label><input type="checkbox"> Indian</label><br>
+    <label><input type="checkbox"> International</label>
+  </div>
+</div>
+
+<!-- Overlay -->
+<div id="overlay" class="overlay"></div>
+<!-- Hero Full-Width Carousel -->
+  <section class="hero-carousel">
+  <div class="carousel-wrapper">
+    <div class="carousel-slide active">
+      <img src="images/3.jpg" alt="Modern Indian Art">
+      <div class="carousel-caption">
+        <h2>MODERN INDIAN ART</h2>
+        <p>Collectors Choice<br>26 Jun – 27 Jun, 2025</p>
+        <button>View Results</button>
+      </div>
+    </div>
+
+    <div class="carousel-slide">
+      <img src="images/1.jpg" alt="Contemporary Collection">
+      <div class="carousel-caption">
+        <h2>CONTEMPORARY COLLECTION</h2>
+        <p>Featured Artists<br>1 Jul – 10 Jul, 2025</p>
+        <button>Explore Now</button>
+      </div>
+    </div>
+
+    <div class="carousel-slide">
+      <img src="images/4.jpg" alt="Exclusive Auction">
+      <div class="carousel-caption">
+        <h2>EXCLUSIVE AUCTION</h2>
+        <p>Rare Pieces<br>15 Jul – 20 Jul, 2025</p>
+        <button>Join Auction</button>
+      </div>
+    </div>
+
+    <div class="carousel-dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</section>
+
+    <!-- Curated Collections -->
+  <section class="collections-section">
+    <div class="section-header">
+      <h2>Curated Collections</h2>
+      <p>Carefully selected artworks from our global network of galleries and artists</p>
+      <a href="#" class="view-all">View All Collections <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="collections-grid">
+      <div class="collection-card">
+        <div class="collection-image">
+          <img src="images/collect1.jpg" alt="Contemporary Art" loading="lazy">
+          <div class="overlay">
+            <button class="btn-icon"><i class="far fa-heart"></i></button>
+          </div>
+        </div>
+        <div class="collection-info">
+          <h3>Contemporary Voices</h3>
+          <p>48 artworks | Starting at $1,200</p>
+        </div>
+      </div>
+
+      <div class="collection-card">
+        <div class="collection-image">
+          <img src="images/collect2.jpg" alt="Modern Art" loading="lazy">
+          <div class="overlay">
+            <button class="btn-icon"><i class="far fa-heart"></i></button>
+          </div>
+        </div>
+        <div class="collection-info">
+          <h3>Modern Masters</h3>
+          <p>32 artworks | Starting at $3,500</p>
+        </div>
+      </div>
+
+      <div class="collection-card">
+        <div class="collection-image">
+          <img src="images/collect3.jpg" alt="Emerging Artists" loading="lazy">
+          <div class="overlay">
+            <button class="btn-icon"><i class="far fa-heart"></i></button>
+          </div>
+        </div>
+        <div class="collection-info">
+          <h3>Emerging Talents</h3>
+          <p>64 artworks | Starting at $500</p>
+        </div>
+      </div>
+
+      <div class="collection-card">
+        <div class="collection-image">
+          <img src="images/collect4.jpg" alt="Modern Art" loading="lazy">
+          <div class="overlay">
+            <button class="btn-icon"><i class="far fa-heart"></i></button>
+          </div>
+        </div>
+        <div class="collection-info">
+          <h3>Abstract Arts</h3>
+          <p>52 artworks | Starting at $500</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<button id="openSidebar" class="filter-btn">
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+  All Filters
+</button>
+
+    <!-- Artworks Grid -->
+
+<section class="artsy-grid-section">
+  <div class="artsy-masonry">
+    <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/grid 1.jpg" alt="Artwork 1" loading="lazy">
+       <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Bea Kusovszky</p>
+        <p class="art-title">Generational Code V</p>
+        <p class="art-gallery">VILTIN Gallery</p>
+        <p class="art-price">€6,200–€6,900</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+       <div class="image-wrapper">
+        <img src="images/grid2.jpg" alt="Artwork 1" loading="lazy">
+       <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Isabel Bonilla</p>
+        <p class="art-title">Denim Ocean 15, 2025</p>
+        <p class="art-gallery">PxP Contemporary</p>
+        <p class="art-price">US$100</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+       <div class="image-wrapper">
+        <img src="images/grid3.jpg" alt="Artwork 1" loading="lazy">
+        <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+     <div class="image-wrapper">
+        <img src="images/grid4.jpg" alt="Artwork 1" loading="lazy">
+        <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Bea Kusovszky</p>
+        <p class="art-title">Generational Code V</p>
+        <p class="art-gallery">VILTIN Gallery</p>
+        <p class="art-price">€6,200–€6,900</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+       <div class="image-wrapper">
+        <img src="images/grid5.jpg" alt="Artwork 1" loading="lazy">
+        <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Isabel Bonilla</p>
+        <p class="art-title">Denim Ocean 15, 2025</p>
+        <p class="art-gallery">PxP Contemporary</p>
+        <p class="art-price">US$100</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+       <div class="image-wrapper">
+        <img src="images/grid6.jpg" alt="Artwork 1" loading="lazy">
+        <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+       <div class="image-wrapper">
+        <img src="images/grid7.jpg" alt="Artwork 1" loading="lazy">
+        <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Bea Kusovszky</p>
+        <p class="art-title">Generational Code V</p>
+        <p class="art-gallery">VILTIN Gallery</p>
+        <p class="art-price">€6,200–€6,900</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+       <div class="image-wrapper">
+        <img src="images/grid8.jpg" alt="Artwork 1" loading="lazy">
+        <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Isabel Bonilla</p>
+        <p class="art-title">Denim Ocean 15, 2025</p>
+        <p class="art-gallery">PxP Contemporary</p>
+        <p class="art-price">US$100</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+  <div class="image-wrapper">
+    <img src="images/grid10.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+  </div>
+  <div class="artsy-card-info">
+    <p class="artist-name">Robert Minervini</p>
+    <p class="art-title">Moon Rising, 2024</p>
+    <p class="art-gallery">Rena Bransten Gallery</p>
+    <p class="art-price">US$1,500</p>
+  </div>
+</div>
+
+    <div class="artsy-card">
+       <div class="image-wrapper">
+        <img src="images/grid11.jpg" alt="Artwork 1" loading="lazy">
+        <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Bea Kusovszky</p>
+        <p class="art-title">Generational Code V</p>
+        <p class="art-gallery">VILTIN Gallery</p>
+        <p class="art-price">€6,200–€6,900</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+       <div class="image-wrapper">
+        <img src="images/grid12.jpg" alt="Artwork 1" loading="lazy">
+       <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Isabel Bonilla</p>
+        <p class="art-title">Denim Ocean 15, 2025</p>
+        <p class="art-gallery">PxP Contemporary</p>
+        <p class="art-price">US$100</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/grid13.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+
+  <!-- What's New This Week -->
+<section id="whats-new" class="whats-new-section">
+  <div class="whats-new-header">
+    <h2>What’s New This Week</h2>
+    <a href="#">View All →</a>
+  </div>
+
+  <div class="whats-new-grid">
+    <!-- Left Big Story -->
+    <div class="story story-large">
+      <img src="images\new1.jpg" alt="Story Large">
+      <div class="story-content">
+        <p class="story-date">4 JUL 2025 | ARTICLE</p>
+        <p>From Cezanne in Provence to Dumas in Athens: the best exhibitions in southern Europe and around the Mediterranean</p>
+      </div>
+    </div>
+
+    <!-- Right Small Stories -->
+    <div class="story-group">
+      <div class="story story-small">
+        <img src="images\new2.jpg" alt="Story Small 1">
+        <div class="story-content">
+          <p class="story-date">4 JUL 2025 | ARTICLE</p>
+          <p>Collecting works on paper: featuring art coming to auction by Elaine de Kooning, Whitten, Condo, Haring, Calder and more</p>
+        </div>
+      </div>
+
+      <div class="story story-small">
+        <img src="images\new3.jpg" alt="Story Small 2">
+        <div class="story-content">
+          <p class="story-date">4 JUL 2025 | ARTICLE</p>
+          <p>Why leading British artists are backing New Contemporaries — ‘a platform for risk-taking’</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Testimonials Carousel -->
+<section class="testimonials">
+  <h2 class="testimonial-heading">What Our Collectors Say</h2>
+  <div class="testimonial-carousel">
+    <div class="testimonial-slide active">
+      <blockquote>
+        “Aurtistiq helped me find pieces that inspire my everyday life.”
+        <cite>— Arjun, Mumbai</cite>
+      </blockquote>
+    </div>
+    <div class="testimonial-slide">
+      <blockquote>
+        “Seamless experience! I never imagined collecting art could be this easy.”
+        <cite>— Priya, Delhi</cite>
+      </blockquote>
+    </div>
+    <div class="testimonial-slide">
+      <blockquote>
+        “The best-curated auctions and excellent service.”
+        <cite>— Karan, Bengaluru</cite>
+      </blockquote>
+    </div>
+    <div class="testimonial-slide">
+      <blockquote>
+        “Beautiful, intuitive, and personalized recommendations.”
+        <cite>— Meera, Pune</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+
+<!-- Newsletter Pop-up -->
+<div id="newsletterPopup" class="newsletter-popup">
+  <div class="popup-content">
+    <button id="closePopup" class="close-popup">&times;</button>
+    <h2>Join Our Collectors Circle</h2>
+    <p>Subscribe to receive the latest auctions, collections, and exclusive offers.</p>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+</div>
+<div id="popupOverlay" class="popup-overlay"></div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-columns">
+      <div class="footer-column">
+        <h4>About</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Discover</h4>
+        <ul>
+          <li><a href="#">Auctions</a></li>
+          <li><a href="#">Artists</a></li>
+          <li><a href="#">Galleries</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Buying on Aurtistiq</a></li>
+          <li><a href="#">Selling on Aurtistiq</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Stay in Touch</h4>
+        <form class="footer-newsletter">
+          <input type="email" placeholder="Your email address" />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Aurtistiq. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

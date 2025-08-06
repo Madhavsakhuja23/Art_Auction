@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Profile</title>
+  <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+  <div class="profile-container">
+    <h1>My Profile</h1>
+    <div class="profile-card">
+      <p><strong>Name:</strong> <span id="pname"></span></p>
+      <p><strong>Email:</strong> <span id="pemail"></span></p>
+       <a href="home.html" class="btn">Back to Home</a>
+      <a href="settings.html" class="btn">Settings</a>
+      <button onclick="logout()" class="btn logout">Logout</button>
+    </div>
+  </div>
+
+  <script>
+    function loadProfile() {
+      const name = sessionStorage.getItem("Firstname") || "Not Set";
+      const email = localStorage.getItem("email") || "Not Set";
+      document.getElementById("pname").innerText = name;
+      document.getElementById("pemail").innerText = email;
+    }
+
+    function logout() {
+      sessionStorage.clear();
+      window.location.href = "home.html";
+    }
+
+    window.onload = loadProfile;
+  </script>
+</body>
+</html>
