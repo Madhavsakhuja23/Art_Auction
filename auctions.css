@@ -449,6 +449,12 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #5a4632;
 }
 
+ .reminder-msg { 
+  font-size: 18px; 
+  font-weight: 600;
+  color: #32210f; 
+  margin-top: 8px; 
+  display: none; }
 /* Footer */
 .site-footer {
   width: 100%;
