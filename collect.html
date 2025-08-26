@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Collect Art & Design Online</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="collect.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">Aurtistiq</div>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="collect.html">Collect</a></li>
+      <li><a href="auctions.html">Auctions</a></li>
+      <li><a href="signup.html">Sign In</a></li>
+    </ul>
+  </nav>
+  <!-- Filter Sidebar -->
+<div id="filterSidebar" class="filter-sidebar">
+  <button id="closeSidebar">&times;</button>
+  <h2>Filters</h2>
+
+    <div class="filter-search">
+  <span class="search-icon">&#128269;</span>
+  <input type="text" placeholder="Search by keyword…">
+</div>
+
+  <div class="filter-group">
+    <h3>Price</h3>
+    <label><input type="checkbox"> Under $1,000</label><br>
+    <label><input type="checkbox"> $1,000 - $5,000</label><br>
+    <label><input type="checkbox"> $5,000+</label>
+  </div>
+
+  <div class="filter-group">
+    <h3>Size</h3>
+    <label><input type="checkbox"> Small</label><br>
+    <label><input type="checkbox"> Medium</label><br>
+    <label><input type="checkbox"> Large</label>
+  </div>
+
+  <div class="filter-group">
+    <h3>Artist Nationality</h3>
+    <label><input type="checkbox"> Indian</label><br>
+    <label><input type="checkbox"> International</label>
+  </div>
+</div>
+
+ <section class="collect-header">
+    <h2>Collect art and design online</h2>
+  </section>
+
+<button id="openSidebar" class="filter-btn">
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+  All Filters
+</button>
+<!-- Overlay -->
+<div id="overlay" class="overlay"></div>
+
+<!-- Artworks Grid -->
+
+<section class="artsy-grid-section">
+  <div class="artsy-masonry">
+    <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/c1.jpg" alt="Artwork 1" loading="lazy">
+       <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Bea Kusovszky</p>
+        <p class="art-title">Generational Code V</p>
+        <p class="art-gallery">VILTIN Gallery</p>
+        <p class="art-price">€6,200–€6,900</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+       <div class="image-wrapper">
+        <img src="images/c2.jpg" alt="Artwork 1" loading="lazy">
+       <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Isabel Bonilla</p>
+        <p class="art-title">Denim Ocean 15, 2025</p>
+        <p class="art-gallery">PxP Contemporary</p>
+        <p class="art-price">US$100</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+       <div class="image-wrapper">
+        <img src="images/c3.jpg" alt="Artwork 1" loading="lazy">
+        <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+     <div class="image-wrapper">
+        <img src="images/c4.jpg" alt="Artwork 1" loading="lazy">
+        <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Bea Kusovszky</p>
+        <p class="art-title">Generational Code V</p>
+        <p class="art-gallery">VILTIN Gallery</p>
+        <p class="art-price">€6,200–€6,900</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+       <div class="image-wrapper">
+        <img src="images/T1.jpg" alt="Artwork 1" loading="lazy">
+        <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Isabel Bonilla</p>
+        <p class="art-title">Denim Ocean 15, 2025</p>
+        <p class="art-gallery">PxP Contemporary</p>
+        <p class="art-price">US$100</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+       <div class="image-wrapper">
+        <img src="images/T2.jpg" alt="Artwork 1" loading="lazy">
+        <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+       <div class="image-wrapper">
+        <img src="images/T3.jpg" alt="Artwork 1" loading="lazy">
+        <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Bea Kusovszky</p>
+        <p class="art-title">Generational Code V</p>
+        <p class="art-gallery">VILTIN Gallery</p>
+        <p class="art-price">€6,200–€6,900</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+       <div class="image-wrapper">
+        <img src="images/T4.jpg" alt="Artwork 1" loading="lazy">
+        <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Isabel Bonilla</p>
+        <p class="art-title">Denim Ocean 15, 2025</p>
+        <p class="art-gallery">PxP Contemporary</p>
+        <p class="art-price">US$100</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+  <div class="image-wrapper">
+    <img src="images/T5.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+  </div>
+  <div class="artsy-card-info">
+    <p class="artist-name">Robert Minervini</p>
+    <p class="art-title">Moon Rising, 2024</p>
+    <p class="art-gallery">Rena Bransten Gallery</p>
+    <p class="art-price">US$1,500</p>
+  </div>
+</div>
+
+    <div class="artsy-card">
+       <div class="image-wrapper">
+        <img src="images/T6.jpg" alt="Artwork 1" loading="lazy">
+        <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Bea Kusovszky</p>
+        <p class="art-title">Generational Code V</p>
+        <p class="art-gallery">VILTIN Gallery</p>
+        <p class="art-price">€6,200–€6,900</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+       <div class="image-wrapper">
+        <img src="images/c5.jpg" alt="Artwork 1" loading="lazy">
+       <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Isabel Bonilla</p>
+        <p class="art-title">Denim Ocean 15, 2025</p>
+        <p class="art-gallery">PxP Contemporary</p>
+        <p class="art-price">US$100</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/c6.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+   <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/c7.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+     <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/c8.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+     <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/C9.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+     <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/C10.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+     <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/past1.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+      <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/past2.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+      </div>
+
+      <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/past3.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+      </div>
+
+      <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/past4.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+      </div>
+
+      <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/past6.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+      </div>
+
+      <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/past5.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/live1.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+      </div>
+
+      <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/live2.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/live3.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+      </div>
+
+      <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/live4.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/live5.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+      </div>
+
+      <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/live6.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+     <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/live7.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+     <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/live8.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+     <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/live9.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+     <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/live10.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+
+     <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/live11.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+     <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/live13.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/upcoming8.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+
+    <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/upcoming7.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/upcoming6.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+<div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/upcoming5.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/upcoming4.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/upcoming3.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/upcoming2.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+    <div class="artsy-card">
+      <div class="image-wrapper">
+        <img src="images/upcoming1.jpg" alt="Artwork 1" loading="lazy">
+    <div class="double-tap-heart"><i class="fas fa-heart"></i></div>
+      </div>
+      <div class="artsy-card-info">
+        <p class="artist-name">Robert Minervini</p>
+        <p class="art-title">Moon Rising, 2024</p>
+        <p class="art-gallery">Rena Bransten Gallery</p>
+        <p class="art-price">US$1,500</p>
+      </div>
+    </div>
+
+    </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-columns">
+      <div class="footer-column">
+        <h4>About</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Discover</h4>
+        <ul>
+          <li><a href="#">Auctions</a></li>
+          <li><a href="#">Artists</a></li>
+          <li><a href="#">Galleries</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Buying on Aurtistiq</a></li>
+          <li><a href="#">Selling on Aurtistiq</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Stay in Touch</h4>
+        <form class="footer-newsletter">
+          <input type="email" placeholder="Your email address" />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Aurtistiq. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script> 
+  
+
+
+const openBtn = document.getElementById('openSidebar');
+const closeBtn = document.getElementById('closeSidebar');
+const sidebar = document.getElementById('filterSidebar');
+const overlay = document.getElementById('overlay');
+
+const searchInput = document.querySelector('.filter-search input');
+
+searchInput.addEventListener('input', (e) => {
+  const keyword = e.target.value.toLowerCase();
+  console.log("Searching for:", keyword);
+  // Here, you’d filter your artwork grid based on title, artist, etc.
+});
+
+
+openBtn.addEventListener('click', () => {
+  sidebar.classList.add('open');
+  overlay.classList.add('show');
+});
+
+closeBtn.addEventListener('click', () => {
+  sidebar.classList.remove('open');
+  overlay.classList.remove('show');
+});
+
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('open');
+  overlay.classList.remove('show');
+});
+
+//heart pop up when double tapped
+document.querySelectorAll('.image-wrapper').forEach(wrapper => {
+  wrapper.addEventListener('dblclick', () => {
+    const heart = wrapper.querySelector('.double-tap-heart');
+    heart.classList.add('animate');
+
+    // Remove the class after animation ends so it can be triggered again
+    heart.addEventListener('animationend', () => {
+      heart.classList.remove('animate');
+    }, { once: true });
+  });
+});
+
+</script>
+</body>
+</html>
