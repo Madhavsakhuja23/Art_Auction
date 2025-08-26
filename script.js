@@ -103,10 +103,13 @@ overlay.addEventListener('click', () => {
 });
 // Show the popup after 5 seconds
 window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('newsletterPopup').style.display = 'block';
-    document.getElementById('popupOverlay').style.display = 'block';
-  }, 5000); // 5 seconds
+  const fn = sessionStorage.getItem("Firstname");
+  if (!fn) {   // show popup only if user is not logged in
+    setTimeout(() => {
+      document.getElementById('newsletterPopup').style.display = 'block';
+      document.getElementById('popupOverlay').style.display = 'block';
+    }, 5000);
+  }
 });
 
 // Close popup logic
