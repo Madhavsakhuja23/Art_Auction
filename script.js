@@ -199,6 +199,15 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// Automatic fill the newsletter email
+document.addEventListener("DOMContentLoaded", () => {
+  // prefill email from localStorage if available
+  const savedEmail = localStorage.getItem("email");
+  if (savedEmail) {
+    document.getElementById("email").value = savedEmail;
+  }
+});
+
 // Footer newsletter email only
 function sendEmail(e){
     e.preventDefault();
