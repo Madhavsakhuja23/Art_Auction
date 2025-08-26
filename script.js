@@ -198,3 +198,19 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+// Footer newsletter email only
+function sendEmail(e){
+    e.preventDefault();
+    const para= {
+        Name: document.getElementById("username").innerText,
+        email: document.getElementById("email").value,
+    }
+    const serviceID="service_gc6z3ld";
+    const templateID="template_6p9239p";
+    emailjs.send(serviceID,templateID,para).then(res=>{
+        document.getElementById("subs").value="Subscribed";
+    })
+    .catch(err=>console.log(err));
+}
+document.getElementById("footerForm").addEventListener("submit", sendEmail);
