@@ -1,39 +1,3 @@
-// search functionality for navbar
-
-const navSearch = document.getElementById('navSearch');
-const artCards = document.querySelectorAll('.artsy-card');
-
-function runSearch(keyword) {
-  keyword = keyword.toLowerCase();
-  let firstMatch = null;
-
-  artCards.forEach(card => {
-    const artistName = card.querySelector('.artist-name').textContent.toLowerCase();
-    const artTitle = card.querySelector('.art-title').textContent.toLowerCase();
-
-    if (keyword && (artistName.includes(keyword) || artTitle.includes(keyword))) {
-      card.classList.add("highlight");
-      card.classList.remove("dim");
-      if (!firstMatch) firstMatch = card;
-    } else if (keyword) {
-      card.classList.add("dim");
-      card.classList.remove("highlight");
-    } else {
-      card.classList.remove("highlight", "dim");
-    }
-  });
-
-  if (firstMatch) firstMatch.scrollIntoView({ behavior: "smooth", block: "center" });
-}
-
-navSearch.addEventListener('input', (e) => runSearch(e.target.value));
-
-
-// Listen for typing in navbar search
-navSearch.addEventListener('input', (e) => {
-  runSearch(e.target.value);
-});
-
 // user name display
 function userdisplay() {
     const fn = sessionStorage.getItem("Firstname");
@@ -160,10 +124,7 @@ document.getElementById('popupOverlay').addEventListener('click', () => {
   document.getElementById('popupOverlay').style.display = 'none';
 });
 
-
-
-// heart pop up when double tapped
-
+// Artwork double-click like toggle
 document.querySelectorAll('.artsy-card').forEach(card => {
   const wrapper = card.querySelector('.image-wrapper');
   const heart = card.querySelector('.double-tap-heart');
@@ -191,7 +152,6 @@ document.querySelectorAll('.artsy-card').forEach(card => {
     }
   });
 });
-
 
 
 // Testimonial carousel auto-slide
@@ -280,5 +240,4 @@ function sendEmail(e){
     })
     .catch(err=>console.log(err));
 }
-
 document.getElementById("footer-newsletter").addEventListener("submit", sendEmail);
