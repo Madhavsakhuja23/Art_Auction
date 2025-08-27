@@ -1,3 +1,39 @@
+// search functionality for navbar
+
+const navSearch = document.getElementById('navSearch');
+const artCards = document.querySelectorAll('.artsy-card');
+
+function runSearch(keyword) {
+  keyword = keyword.toLowerCase();
+  let firstMatch = null;
+
+  artCards.forEach(card => {
+    const artistName = card.querySelector('.artist-name').textContent.toLowerCase();
+    const artTitle = card.querySelector('.art-title').textContent.toLowerCase();
+
+    if (keyword && (artistName.includes(keyword) || artTitle.includes(keyword))) {
+      card.classList.add("highlight");
+      card.classList.remove("dim");
+      if (!firstMatch) firstMatch = card;
+    } else if (keyword) {
+      card.classList.add("dim");
+      card.classList.remove("highlight");
+    } else {
+      card.classList.remove("highlight", "dim");
+    }
+  });
+
+  if (firstMatch) firstMatch.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+navSearch.addEventListener('input', (e) => runSearch(e.target.value));
+
+
+// Listen for typing in navbar search
+navSearch.addEventListener('input', (e) => {
+  runSearch(e.target.value);
+});
+
 // user name display
 function userdisplay() {
     const fn = sessionStorage.getItem("Firstname");
@@ -123,17 +159,39 @@ document.getElementById('popupOverlay').addEventListener('click', () => {
   document.getElementById('newsletterPopup').style.display = 'none';
   document.getElementById('popupOverlay').style.display = 'none';
 });
-document.querySelectorAll('.image-wrapper').forEach(wrapper => {
-  wrapper.addEventListener('dblclick', () => {
-    const heart = wrapper.querySelector('.double-tap-heart');
-    heart.classList.add('animate');
 
-    // Remove the class after animation ends so it can be triggered again
+
+
+// heart pop up when double tapped
+
+document.querySelectorAll('.artsy-card').forEach(card => {
+  const wrapper = card.querySelector('.image-wrapper');
+  const heart = card.querySelector('.double-tap-heart');
+  const likeIcon = card.querySelector('.like-icon i');
+
+  // Double-click on image → show big heart + activate small heart
+  wrapper.addEventListener('dblclick', () => {
+    heart.classList.add('animate');
+    likeIcon.classList.add('fas', 'liked');
+    likeIcon.classList.remove('far');
+
     heart.addEventListener('animationend', () => {
       heart.classList.remove('animate');
     }, { once: true });
   });
+
+  // Click small heart → toggle
+  likeIcon.parentElement.addEventListener('click', () => {
+    if (likeIcon.classList.contains('fas')) {
+      likeIcon.classList.remove('fas', 'liked');
+      likeIcon.classList.add('far');
+    } else {
+      likeIcon.classList.remove('far');
+      likeIcon.classList.add('fas', 'liked');
+    }
+  });
 });
+
 
 
 // Testimonial carousel auto-slide
@@ -222,4 +280,5 @@ function sendEmail(e){
     })
     .catch(err=>console.log(err));
 }
+
 document.getElementById("footerForm").addEventListener("submit", sendEmail);
