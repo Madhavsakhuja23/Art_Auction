@@ -25,7 +25,11 @@
       <li><a href="auctions.html">Auctions</a></li>
       <li><a href="signup.html">Sign In</a></li>
     </ul>
-
+    <div class="dropdown-content" id="dropdown">
+        <a href="profile.html" style="text-decoration: none;">👤 View Profile</a>
+        <a href="settings.html">⚙️ Settings</a>
+        <a href="home.html" id="logout">🚪 Log Out</a>
+    </div>
   </nav>
   <!-- Filter Sidebar -->
 <div id="filterSidebar" class="filter-sidebar">
@@ -472,8 +476,8 @@
       <div class="footer-column">
         <h4>Stay in Touch</h4>
         <form class="footer-newsletter">
-          <input type="email" placeholder="Your email address" />
-          <button type="submit">Subscribe</button>
+          <input id="email" type="email" placeholder="Your email address" />
+          <input type="submit" id="subs">Subscribe</button>
         </form>
       </div>
     </div>

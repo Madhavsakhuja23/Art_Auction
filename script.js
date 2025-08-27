@@ -281,4 +281,4 @@ function sendEmail(e){
     .catch(err=>console.log(err));
 }
 
-document.getElementById("footerForm").addEventListener("submit", sendEmail);
+document.getElementById("footer-newsletter").addEventListener("submit", sendEmail);
