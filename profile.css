@@ -1,6 +1,8 @@
 body {
-  font-family: Arial, sans-serif;
-  background: #f5efe6;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f5f0eb; /* nude beige */
+  color: #3d2b1f;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,25 +10,129 @@ body {
 }
 
 .profile-container {
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  width: 90%;
+  max-width: 900px;
+  padding: 20px;
+}
+
+.profile-card {
+  display: flex;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0px 6px 18px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+/* LEFT SIDE */
+.profile-left {
+  flex: 1;
+  background: #f5f0eb;
   text-align: center;
+  padding: 2rem 1rem;
+  border-right: 2px solid #e0d3c2;
+}
+
+
+.profile-left h2 {
+  margin: 20px 0;
+}
+
+.badge {
+  background: #d8c3a5;
+  color: #3d2b1f;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.bio {
+  font-size: 0.9rem;
+  color: #6e5845;
+  margin: 20px 0;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1.5rem;
+}
+.stat {
+  flex: 1;
+  margin: 0 5px;
+}
+.stat h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #a47148;
+}
+.stat p {
+  font-size: 0.85rem;
+  color: #5a4636;
+}
+
+/* RIGHT SIDE */
+.profile-right {
+  flex: 2;
+  padding: 2rem;
+}
+
+.profile-right h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.profile-right p {
+  font-size: 1rem;
+  margin: 10px 0;
+  color: #4a3b2a;
+}
+
+.profile-right i {
+  margin-right: 8px;
+  color: #a47148;
+}
+
+/* ACTIONS */
+.profile-actions {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .btn {
-  display: inline-block;
-  margin: 10px 5px;
-  padding: 10px 20px;
-  background: #8b6f47;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  flex: 1 1 45%;
+  text-align: center;
   text-decoration: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: none;
   cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  background: #d8c3a5;
+  color: #3d2b1f;
+}
+.btn:hover {
+  background: #a47148;
+  color: #fff;
+}
+.edit{
+  background: #5c4438;
+  color: #fff;
+}
+.edit :hover{
+background: #31231c;
+}
+.logout {
+  background: #5c4438;
+  color: #fff;
+}
+.logout:hover {
+  background: #31231c;
 }
 
-.btn.logout {
-  background: #d9534f;
-}
+
+
