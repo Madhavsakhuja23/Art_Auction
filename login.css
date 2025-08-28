@@ -50,9 +50,12 @@ body {
   color: #333;
   font-weight: bold;
 }
-#cross a{
+#cross a {
   text-decoration: none;
-  
+  color: #4b3f33;  /* brown color */
+}
+#cross a:hover {
+  color: #3a322b;  /* darker brown on hover */
 }
 /* Heading */
 h2 {
@@ -118,4 +121,14 @@ input[type="submit"]:hover {
 }
 #chk{
   display: none;
+
+}
+.forgot-link {
+  text-align: left;
+  margin-top: 10px;
+  font-size: 0.95rem;
+}
+.forgot-link a {
+  color:#12100e;
+  font-weight: 500;
 }
