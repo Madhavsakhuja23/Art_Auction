@@ -11,7 +11,7 @@
     <div class="profile-card">
       <p><strong>Name:</strong> <span id="pname"></span></p>
       <p><strong>Email:</strong> <span id="pemail"></span></p>
-       <a href="home.html" class="btn">Back to Home</a>
+       <a href="index.html" class="btn">Back to Home</a>
       <a href="settings.html" class="btn">Settings</a>
       <button onclick="logout()" class="btn logout">Logout</button>
     </div>
@@ -27,7 +27,7 @@
 
     function logout() {
       sessionStorage.clear();
-      window.location.href = "home.html";
+      window.location.href = "index.html";
     }
 
     window.onload = loadProfile;
