@@ -373,7 +373,6 @@ h1, h2, h3, h4, h5, h6 {
   height: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
-  opacity: 0.5;
 }
 
 .carousel-card:hover img {
@@ -482,7 +481,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 1rem;
 }
 
-.auction-card {
+.auction-card,#auction-card{
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -490,7 +489,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: transform 0.2s;
 }
 
-.auction-card:hover {
+.auction-card:hover,#auction-card:hover{
   transform: translateY(-4px);
 }
 
@@ -499,19 +498,32 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 8px;
   margin-bottom: 0.75rem;
 }
-
+#auction-card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  opacity: 0.5;
+}
 .auction-card h4 {
   margin: 0.5rem 0 0.3rem;
   font-size: 1.1rem;
   color: #4b3f33;
 }
-
+#auction-card h4 {
+  margin: 0.5rem 0 0.3rem;
+  font-size: 1.1rem;
+  color: #4b3f33;
+}
 .auction-card p {
   font-size: 0.9rem;
   color: #5a4632;
   margin: 0.2rem 0;
 }
-
+#auction-card p {
+  margin: 0.5rem 0 0.3rem;
+  font-size: 1.1rem;
+  color: #4b3f33;
+}
 
 /* Footer */
 .site-footer {
