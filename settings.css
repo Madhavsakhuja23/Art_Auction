@@ -1,54 +1,107 @@
+/* Reset and Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Manrope', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f5efe6;
+  color: #4b3f33;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  overflow: hidden;
 }
 
+/* Page load animation */
+.fade-in {
+  animation: fadeIn 1s ease-in-out forwards;
+  opacity: 0;
+}
+@keyframes fadeIn {
+  0% { transform: translateY(50px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Settings Container */
 .settings-container {
-  background-color: #fff;
+  position: relative;
+  background-color: #d2c3b3;   /* same as login page */
   padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  width: 350px;
+  border-radius: 16px;
+  width: 400px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.settings-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Heading */
 .settings-container h1 {
   margin-bottom: 25px;
-  color: #4b3f33;
+  color: #3a322b;
   text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
 }
 
+/* Form Styling */
 form {
   display: flex;
   flex-direction: column;
+  gap: 18px;
 }
 
 label {
-  margin-bottom: 5px;
-  font-weight: bold;
+  font-weight: 600;
   color: #4b3f33;
 }
 
-input {
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+/* Input fields */
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  padding: 14px;
+  border: 1.5px solid #d6c4b2;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 1rem;
+  background-color: #fdfaf6;
+  color: #4b3f33;
+  outline: none;
+  transition: 0.3s;
 }
 
+input:focus {
+  border-color: #4b3f33;
+  background-color: #fff;
+}
+
+/* Button Styling */
 button {
-  padding: 12px;
   background-color: #4b3f33;
   color: white;
   border: none;
-  border-radius: 6px;
+  padding: 14px;
+  border-radius: 8px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 500;
+  transition: 0.3s;
 }
 
 button:hover {
   background-color: #3a322b;
+}
+
+/* Error Messages (inline text) */
+#pwd-error,
+#pwdchk {
+  font-size: 0.9rem;
+  margin-top: -10px;
 }
