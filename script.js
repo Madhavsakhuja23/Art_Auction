@@ -239,7 +239,7 @@ function sendEmail(e){
     const serviceID="service_gc6z3ld";
     const templateID="template_6p9239p";
     emailjs.send(serviceID,templateID,para).then(res=>{
-        document.getElementById("subs").value="Subscribed";
+        document.getElementById("subs").value = "Subscribed";
     })
     .catch(err=>console.log(err));
 }
