@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Aurtistiq's Auction</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="temp.css" />
+  <link rel="stylesheet" href="auctions.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -12,14 +12,26 @@
   <!-- Navbar -->
   <nav class="navbar">
     <div class="logo">Aurtistiq</div>
+
+     <div class="nav-search">
+    <input type="text" id="navSearch" placeholder="Search artworks…">
+    <span class="search-icon"></span>
+  </div>
+
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="collect.html">Collect</a></li>
       <li><a href="auctions.html">Auctions</a></li>
-      <li><a href="signup.html">Sign In</a></li>
+      <li id="Signin"><a href="signup.html">Sign In</a></li>
+      <li id="username"></li>
     </ul>
+    <div class="dropdown-content" id="dropdown">
+        <a href="profile.html" style="text-decoration: none;">View Profile</a>
+        <a href="settings.html">Settings</a>
+        <a href="index.html" id="logout">Log Out</a>
+    </div>
   </nav>
-
+  
   <!-- Hero Section -->
   <section class="auction-hero">
     <div class="hero-left">
@@ -573,6 +585,33 @@
         <button class="bid-btn" onclick="window.location.href='past7-results.html'">View Results</button>
       </div>
     </div>
+
+    <div class="auction-card">
+      <img src="images/c1.jpg" alt="Past 7">
+      <div class="card-content">
+        <h3>Is It better to Speak?</h3>
+        <p>Dreamlike landscapes. Sale closed.</p>
+        <button class="bid-btn" onclick="window.location.href='past7-results.html'">View Results</button>
+      </div>
+    </div>
+  
+    <div class="auction-card">
+      <img src="images/c2.jpg" alt="Past 7">
+      <div class="card-content">
+        <h3>See The Magic</h3>
+        <p>Dreamlike landscapes. Sale closed.</p>
+        <button class="bid-btn" onclick="window.location.href='past7-results.html'">View Results</button>
+      </div>
+    </div>
+
+     <div class="auction-card">
+      <img src="images/c6.jpg" alt="Past 7">
+      <div class="card-content">
+        <h3>Freedom</h3>
+        <p>Dreamlike landscapes. Sale closed.</p>
+        <button class="bid-btn" onclick="window.location.href='past7-results.html'">View Results</button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -604,15 +643,14 @@
           <li><a href="#">Selling on Aurtistiq</a></li>
         </ul>
       </div>
-      <div class="footer-column">
-        <h4>Stay in Touch</h4>
-        <form class="footer-newsletter">
-          <input type="email" placeholder="Your email address" />
-          <button type="submit">Subscribe</button>
-        </form>
-      </div>
+      <div class="footer-column footer-newsletter">
+  <h4>Stay in Touch</h4>
+  <form id="footer-newsletter" class="footerForm">
+    <input id="email" type="email" placeholder="Your email address" required />
+    <button type="submit">Subscribe</button>
+  </form>
+</div>
     </div>
-
     <div class="footer-bottom">
       <p>© 2025 Aurtistiq. All rights reserved.</p>
       <div class="footer-social">
@@ -623,53 +661,57 @@
     </div>
   </div>
 </footer>
-  <!--- <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      document.querySelectorAll(".breadcrumb-tab").forEach(tab => {
-        tab.addEventListener("click", function () {
-          // Toggle tab active
-          document.querySelectorAll(".breadcrumb-tab").forEach(t => t.classList.remove("active"));
-          this.classList.add("active");
-
-          // Toggle carousel
-          document.querySelectorAll(".carousel-wrapper").forEach(c => c.classList.remove("active"));
-          const category = this.getAttribute("data-category");
-          const target = document.getElementById(`${category}-carousel`);
-          if (target) target.classList.add("active");
-        });
-      });
-    });
-
-    function showAuctionTab(tab) {
-  const tabs = document.querySelectorAll(".auction-tab");
-  tabs.forEach(t => t.classList.remove("active"));
-
-  const sections = {
-    current: document.getElementById("current-auctions"),
-    upcoming: document.getElementById("upcoming-auctions"),
-    past: document.getElementById("past-auctions")
-  };
-
-  for (const key in sections) {
-    sections[key].style.display = (key === tab) ? "grid" : "none";
-  }
-
-  event.target.classList.add("active");
-}
-
-// to show reminder msg
-document.querySelectorAll('.reminder-btn').forEach(button => {
-  button.addEventListener('click', function () {
-    this.textContent = "Reminder Set";
-    this.disabled = true;
-    let msg = this.nextElementSibling;
-    msg.textContent = "You will be updated soon.";
-    msg.style.display = "block";
-  });
-});
-  </script>-->
 
   <script>
+
+  
+// user name display
+function userdisplay() {
+    const fn = sessionStorage.getItem("Firstname");
+    if (fn) {
+        document.getElementById("Signin").style.display = "none";
+        document.getElementById("username").style.display = "inline";
+        document.getElementById("username").innerText = fn;
+    } else {
+        document.getElementById("Signin").style.display = "inline";
+        document.getElementById("username").style.display = "none";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", userdisplay);
+// logout
+let lout=document.getElementById("logout");
+lout.addEventListener("click",()=>{
+  sessionStorage.clear();
+});
+
+
+// dropdown
+const userButton = document.getElementById("username");
+const dropdown = document.getElementById("dropdown");
+
+// Toggle dropdown
+userButton.addEventListener("click", () => {
+  dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+});
+
+// Close dropdown on outside click
+window.addEventListener("click", function (e) {
+  if (!userButton.contains(e.target)) {
+    dropdown.style.display = "none";
+  }
+});
+
+// Logout button
+document.getElementById("logout").addEventListener("click", function (e) {
+  e.preventDefault();
+  // Example logout logic
+  document.getElementById("username").style.display="none";
+  document.getElementById("Signin").style.display="inline";
+  window.location.href="home.html";
+});
+
+
   // Breadcrumb filter for Curator's Picks / Trending Lots
   const breadcrumbTabs = document.querySelectorAll('.breadcrumb-tab');
   const carousels = {
@@ -718,8 +760,36 @@ document.querySelectorAll('.reminder-btn').forEach(button => {
       this.disabled = true;
     });
   });
+
+  
+// Automatic fill the newsletter email
+document.addEventListener("DOMContentLoaded", () => {
+  // prefill email from localStorage if available
+  const savedEmail = localStorage.getItem("email");
+  if (savedEmail) {
+    document.getElementById("email").value = savedEmail;
+  }
+});
+
+
+// Footer newsletter email only
+function sendEmail(e){
+    e.preventDefault();
+    const para= {
+        Name: document.getElementById("username").innerText,
+        email: document.getElementById("email").value,
+    }
+    const serviceID="service_gc6z3ld";
+    const templateID="template_6p9239p";
+    emailjs.send(serviceID,templateID,para).then(res=>{
+        document.getElementById("subs").value="Subscribed";
+    })
+    .catch(err=>console.log(err));
+}
+document.getElementById("footer-newsletter").addEventListener("submit", sendEmail);
+
+
 </script>
 
 </body>
 </html>
-
