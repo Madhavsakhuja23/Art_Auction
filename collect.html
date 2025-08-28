@@ -10,7 +10,7 @@
 </head>
 <body>
 
-  <!-- Navbar -->
+    <!-- Navbar -->
   <nav class="navbar">
     <div class="logo">Aurtistiq</div>
 
@@ -23,11 +23,16 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="collect.html">Collect</a></li>
       <li><a href="auctions.html">Auctions</a></li>
-      <li><a href="signup.html">Sign In</a></li>
+      <li id="Signin"><a href="signup.html">Sign In</a></li>
+      <li id="username"></li>
     </ul>
-
+    <div class="dropdown-content" id="dropdown">
+        <a href="profile.html" style="text-decoration: none;">View Profile</a>
+        <a href="settings.html">Settings</a>
+        <a href="index.html" id="logout">Log Out</a>
+    </div>
   </nav>
-
+  
   <!-- Filter Sidebar -->
 <div id="filterSidebar" class="filter-sidebar">
   <button id="closeSidebar">&times;</button>
@@ -709,6 +714,7 @@
     </div>
 </section>
 
+<!-- Footer -->
 <footer class="site-footer">
   <div class="footer-content">
     <div class="footer-columns">
@@ -736,15 +742,14 @@
           <li><a href="#">Selling on Aurtistiq</a></li>
         </ul>
       </div>
-      <div class="footer-column">
-        <h4>Stay in Touch</h4>
-        <form class="footer-newsletter">
-          <input type="email" placeholder="Your email address" />
-          <button type="submit">Subscribe</button>
-        </form>
-      </div>
+      <div class="footer-column footer-newsletter">
+  <h4>Stay in Touch</h4>
+  <form id="footer-newsletter" class="footerForm">
+    <input id="email" type="email" placeholder="Your email address" required />
+    <button type="submit">Subscribe</button>
+  </form>
+</div>
     </div>
-
     <div class="footer-bottom">
       <p>© 2025 Aurtistiq. All rights reserved.</p>
       <div class="footer-social">
@@ -756,6 +761,55 @@
   </div>
 </footer>
 <script> 
+
+
+// user name display
+function userdisplay() {
+    const fn = sessionStorage.getItem("Firstname");
+    if (fn) {
+        document.getElementById("Signin").style.display = "none";
+        document.getElementById("username").style.display = "inline";
+        document.getElementById("username").innerText = fn;
+    } else {
+        document.getElementById("Signin").style.display = "inline";
+        document.getElementById("username").style.display = "none";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", userdisplay);
+// logout
+let lout=document.getElementById("logout");
+lout.addEventListener("click",()=>{
+  sessionStorage.clear();
+});
+
+
+// dropdown
+const userButton = document.getElementById("username");
+const dropdown = document.getElementById("dropdown");
+
+// Toggle dropdown
+userButton.addEventListener("click", () => {
+  dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+});
+
+// Close dropdown on outside click
+window.addEventListener("click", function (e) {
+  if (!userButton.contains(e.target)) {
+    dropdown.style.display = "none";
+  }
+});
+
+// Logout button
+document.getElementById("logout").addEventListener("click", function (e) {
+  e.preventDefault();
+  // Example logout logic
+  document.getElementById("username").style.display="none";
+  document.getElementById("Signin").style.display="inline";
+  window.location.href="home.html";
+});
+
+
   
 //nav bar search funtionaliy
 
@@ -853,6 +907,34 @@ document.querySelectorAll('.artsy-card').forEach(card => {
     }
   });
 });
+
+
+// Automatic fill the newsletter email
+document.addEventListener("DOMContentLoaded", () => {
+  // prefill email from localStorage if available
+  const savedEmail = localStorage.getItem("email");
+  if (savedEmail) {
+    document.getElementById("email").value = savedEmail;
+  }
+});
+
+
+// Footer newsletter email only
+function sendEmail(e){
+    e.preventDefault();
+    const para= {
+        Name: document.getElementById("username").innerText,
+        email: document.getElementById("email").value,
+    }
+    const serviceID="service_gc6z3ld";
+    const templateID="template_6p9239p";
+    emailjs.send(serviceID,templateID,para).then(res=>{
+        document.getElementById("subs").value="Subscribed";
+    })
+    .catch(err=>console.log(err));
+}
+document.getElementById("footer-newsletter").addEventListener("submit", sendEmail);
+
 
 
 </script>
