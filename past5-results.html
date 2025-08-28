@@ -13,70 +13,95 @@
       padding: 24px;
     }
     .container {
-      max-width: 900px;
+      max-width: 940px;
       margin: 0 auto;
       background: white;
-      padding: 2rem;
-      border-radius: 12px;
+      padding: 2rem 2.2rem;
+      border-radius: 14px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
-    h1, h2, h3 {
-      font-family: 'Georgia', serif;
-      color: #5a4632;
+    .top-section {
+      display: flex;
+      gap: 2.2rem;
+      margin-bottom: 2rem;
+      align-items: flex-start;
     }
-    h1 {
-      margin-bottom: 1rem;
+    .image-container {
+      flex: 0 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 88px;
     }
-    .art-image {
-      width: 100%;
-      max-height: 400px;
-      object-fit: contain;
-      margin-bottom: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    .image-container img {
+      max-width: 320px;
+      max-height: 320px;
+      width: auto;
+      height: auto;
+      border-radius: 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.22);
+      display: block;
+      background: #d8cfc3;
+    }
+    .content-container {
+      flex: 1 1 0;
     }
     .summary {
       background: #f9f5ee;
       border-radius: 8px;
       padding: 1rem 1.2rem;
-      margin-bottom: 1.7rem;
+      margin-bottom: 1.2rem;
       font-style: italic;
       color: #7a6c5d;
       font-size: 1.05em;
     }
-    .details {
-      margin-bottom: 2rem;
-    }
     .details p {
       margin: 0.5rem 0;
-      font-size: 1rem;
+      font-size: 1.07rem;
+    }
+    h1 {
+      font-family: 'Georgia', serif;
+      color: #5a4632;
+      margin-top: 0;
+      margin-bottom: 1.1rem;
+      font-size: 2rem;
+    }
+    h2 {
+      font-family: 'Georgia', serif;
+      color: #5a4632;
+      margin-top: 2.2rem;
+      margin-bottom: 0.9rem;
+    }
+    h3 {
+      font-family: 'Georgia', serif;
+      color: #5a4632;
+      margin-top: 1.8rem;
+      margin-bottom: 0.7rem;
     }
     .results-table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 2rem;
+      margin: 1.1rem 0 1.8rem 0;
     }
     .results-table th, .results-table td {
       border: 1px solid #ddd;
-      padding: 0.75rem 1rem;
+      padding: 0.78rem 1rem;
       text-align: left;
     }
     .results-table th {
       background-color: #8b6f47;
       color: white;
+      font-size: 1rem;
     }
     .buyer-note {
       background: #f9f5ee;
-      padding: 10px 15px;
-      border-radius: 8px;
       color: #7a6c5d;
+      padding: 0.8rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.99em;
       margin-bottom: 2rem;
-      font-size: 0.95rem;
     }
-    .provenance, .exhibition, .literature {
-      margin-bottom: 2rem;
-    }
-    .provenance ul, .exhibition ul, .literature ul {
+    ul {
       padding-left: 1.2rem;
       color: #5a4632;
     }
@@ -93,24 +118,47 @@
     .back-link:hover {
       background-color: #5a4632;
     }
+    @media (max-width: 850px) {
+      .top-section {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .image-container {
+        width: 100%;
+        justify-content: center;
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+      .image-container img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Portrait Magic</h1>
-    <img src="images/past5.jpg" alt="Portrait Magic Artwork" class="art-image" />
-    <div class="summary">
-      <strong>Portrait Magic</strong> highlights evocative modern portraiture that captures the essence and personality of its subjects through bold expression.
+    <div class="top-section">
+      <div class="image-container">
+        <img src="images/past5.jpg" alt="Portrait Magic Artwork" />
+      </div>
+      <div class="content-container">
+        <h1>Portrait Magic</h1>
+        <div class="summary">
+          <strong>Portrait Magic</strong> highlights evocative modern portraiture, capturing the essence and personality of subjects with bold expression and vibrant color.
+        </div>
+        <div class="details">
+          <p><strong>Artist:</strong> Emilia Hart</p>
+          <p><strong>Medium:</strong> Oil on canvas</p>
+          <p><strong>Dimensions:</strong> 85 x 60 cm</p>
+          <p><strong>Year:</strong> 1965</p>
+          <p><strong>Description:</strong> The portrait series is celebrated for its emotional depth, innovative use of color, and ability to convey mood and character.</p>
+          <p><strong>Auction Date:</strong> September 12, 2024</p>
+          <p><strong>Estimate Price:</strong> $8,000 – $14,000</p>
+        </div>
+      </div>
     </div>
-    <div class="details">
-      <p><strong>Artist:</strong> Emilia Hart</p>
-      <p><strong>Medium:</strong> Oil on canvas</p>
-      <p><strong>Dimensions:</strong> 85 x 60 cm</p>
-      <p><strong>Year:</strong> 1965</p>
-      <p><strong>Description:</strong> This portrait series is renowned for its intense emotional depth and innovative use of color to evoke mood and character.</p>
-      <p><strong>Auction Date:</strong> September 12, 2024</p>
-      <p><strong>Estimate Price:</strong> $8,000 – $14,000</p>
-    </div>
+
     <h2>Auction Results</h2>
     <table class="results-table">
       <thead>
@@ -137,32 +185,41 @@
           <td>$7,800</td>
           <td>Private Buyer</td>
         </tr>
+        <tr>
+          <td>11</td>
+          <td>Reflective Mood</td>
+          <td>Oil on panel</td>
+          <td>$6,500</td>
+          <td>Gallery Moderne</td>
+        </tr>
       </tbody>
     </table>
+
     <div class="buyer-note">
-      <strong>Note:</strong> Final hammer prices do not include buyer's premium and applicable taxes. Please contact the auction house for full purchase details.
+      <strong>Note:</strong> Hammer prices do not include buyer's premium and applicable taxes. Contact the auction house for full purchase details.
     </div>
-    <div class="provenance">
-      <h3>Provenance</h3>
-      <ul>
-        <li>Private Collection, Milan (1970–1990)</li>
-        <li>Modern Art Gallery, Florence (1990–2015)</li>
-      </ul>
-    </div>
-    <div class="exhibition">
-      <h3>Exhibition History</h3>
-      <ul>
-        <li>Modern Portraits, Uffizi Gallery, Florence, 1995</li>
-        <li>Expressionist Masters, Palazzo Pitti, Florence, 2005</li>
-      </ul>
-    </div>
-    <div class="literature">
-      <h3>Literature</h3>
-      <ul>
-        <li>D. Morales, <em>Portraits of the 20th Century</em>, 1998, p. 178</li>
-        <li>F. Benedetti, <em>Modern Expressionism</em>, 2011, p. 94</li>
-      </ul>
-    </div>
+
+    <h3>Provenance</h3>
+    <ul>
+      <li>Private Collection, Milan (1970–1990)</li>
+      <li>Modern Art Gallery, Florence (1990–2015)</li>
+      <li>Personal Estate Sale, Rome (2016–2020)</li>
+    </ul>
+
+    <h3>Exhibition History</h3>
+    <ul>
+      <li>Modern Portraits, Uffizi Gallery, Florence, 1995</li>
+      <li>Expressionist Masters, Palazzo Pitti, Florence, 2005</li>
+      <li>Contemporary Faces, Venice Biennale, 2010</li>
+    </ul>
+
+    <h3>Literature</h3>
+    <ul>
+      <li>D. Morales, <em>Portraits of the 20th Century</em>, 1998, p. 178</li>
+      <li>F. Benedetti, <em>Modern Expressionism</em>, 2011, p. 94</li>
+      <li>M. Rossi, <em>Italian Portrait Masters</em>, 2018, p. 56</li>
+    </ul>
+
     <a href="auctions.html" class="back-link">← Back to Auctions</a>
   </div>
 </body>
