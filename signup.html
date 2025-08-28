@@ -12,7 +12,7 @@
   <div id="outer" class="fade-in">
     <p id="cross"><a href="index.html">&cross;</a></p>
     <h2>Register</h2>
-    <form onsubmit="return handle_submit()" method="post">
+    <form method="post" id="registerForm">
       <input type="text" name="Fn" id="fn" placeholder="First Name" required />
       <div id="name_criteria"></div>
       <input type="text" name="ln" id="ln" placeholder="Last Name" required />
@@ -68,20 +68,51 @@
 
 
     }
-    function isValidEmail(email) {
-      const regex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com)$/;
-      let le=localStorage.getItem("email");
-      if (!regex.test(email)) {
-        document.getElementById("email_criteria").style.display = "block";
-        document.getElementById("email_criteria").innerText = "Email must end with @gmail.com or @yahoo.com.";
-      }
-      if(le===document.getElementById("email").value){
-    document.getElementById("email_criteria").innerText="Already have an Existing Account with this Email.";
+  async function emailValidate() {
+    try{
+    let key = "ema_live_myHyeXrksaI52K3z9nDBs1z46RYEjNL9W4CaMKRd";
+    let email = document.getElementById("email").value;
+    let url = `https://api.emailvalidation.io/v1/info?apikey=${key}&email=${email}`;
+    let res = await fetch(url);
+    let result = await res.json();
+
+    const regex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com)$/;
+
+    // Check allowed domains
+    if (!regex.test(email)) {
+      document.getElementById("email_criteria").style.display = "block";
+      document.getElementById("email_criteria").innerText =
+        "Email must end with @gmail.com or @yahoo.com.";
+      return false;
+    }
+
+    // Check if already stored
+    let le = localStorage.getItem("email");
+    if (le === email) {
+      document.getElementById("email_criteria").style.display = "block";
+      document.getElementById("email_criteria").innerText =
+        "Already have an existing account with this Email.";
+      return false;
+    }
+
+    // API validation check
+    if (result.state === "deliverable") {
+      document.getElementById("email_criteria").style.display = "none"; // hide error
+      return true;
+    } else {
+      document.getElementById("email_criteria").style.display = "block";
+      document.getElementById("email_criteria").innerText =
+        "Enter the valid email address.";
+      return false;
+    }
+  }
+  catch (err) {
     document.getElementById("email_criteria").style.display = "block";
+    document.getElementById("email_criteria").innerText = "Email validation failed. Try again.";
     return false;
   }
-      return regex.test(email);
-    }
+}
+
     function user() {
       let first_name = document.getElementById("fn").value.trim();
       const hasUpperCase = /[A-Z]/.test(first_name);
@@ -94,22 +125,21 @@
       }
       return true;
     }
-    function handle_submit() {
-    const pwdValid = pwd_check();
-    const emailValid = isValidEmail(document.getElementById("email").value);
-    const userValid = user();
+document.getElementById("registerForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
+  const pwdValid = pwd_check();
+  const emailValid = await emailValidate();
+  const userValid = user();
 
-    if (pwdValid && emailValid && userValid) {
-      // Save to storage and redirect
-      localStorage.setItem("email", document.getElementById("email").value);
-      localStorage.setItem("password", document.getElementById("pwd").value);
-      localStorage.setItem("Firstname", document.getElementById("fn").value);
-      window.location.href = "login.html";
-      // return true;
-    }
+  if (pwdValid && emailValid && userValid) {
+    localStorage.setItem("email", document.getElementById("email").value);
+    localStorage.setItem("password", document.getElementById("pwd").value);
+    localStorage.setItem("Firstname", document.getElementById("fn").value);
 
-    return false; // stop form submission if any check fails
+    window.location.href = "login.html";
   }
+  return false;
+});
   </script>
 </body>
 
