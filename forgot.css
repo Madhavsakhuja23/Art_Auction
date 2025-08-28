@@ -1,3 +1,4 @@
+/*
 body {
   font-family: Arial, sans-serif;
   background-color: #f5efe6;
@@ -54,4 +55,115 @@ button:hover {
 }
 #emailexist,#pwdcriteria{
     display: none;
+}
+*/
+
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Manrope', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5efe6;
+  color: #4b3f33;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Page load animation */
+.fade-in {
+  animation: fadeIn 1s ease-in-out forwards;
+  opacity: 0;
+}
+@keyframes fadeIn {
+  0% { transform: translateY(50px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Container */
+.settings-container {
+  background-color: #d2c3b3;
+  padding: 40px;
+  border-radius: 16px;
+  width: 420px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.settings-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Heading */
+.settings-container h1 {
+  text-align: center;
+  color: #3a322b;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+}
+
+/* Form */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #3a322b;
+  margin-bottom: 5px;
+}
+
+/* Inputs */
+input[type="email"],
+input[type="password"] {
+  padding: 14px;
+  border: 1.5px solid #d6c4b2;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fdfaf6;
+  color: #4b3f33;
+  outline: none;
+  transition: 0.3s;
+  width: 100%;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #4b3f33;
+  background-color: #fff;
+}
+
+/* Button */
+button[type="submit"] {
+  background-color: #4b3f33;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #3a322b;
+}
+
+/* Feedback / error messages */
+#emailexist,
+#pwdcriteria {
+  font-size: 0.9rem;
+  margin-top: -10px;
+  margin-bottom: -5px;
 }
