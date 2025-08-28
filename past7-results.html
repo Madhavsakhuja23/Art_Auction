@@ -13,70 +13,95 @@
       padding: 24px;
     }
     .container {
-      max-width: 900px;
+      max-width: 940px;
       margin: 0 auto;
       background: white;
-      padding: 2rem;
-      border-radius: 12px;
+      padding: 2rem 2.2rem;
+      border-radius: 14px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
-    h1, h2, h3 {
-      font-family: 'Georgia', serif;
-      color: #5a4632;
+    .top-section {
+      display: flex;
+      gap: 2.2rem;
+      margin-bottom: 2rem;
+      align-items: flex-start;
     }
-    h1 {
-      margin-bottom: 1rem;
+    .image-container {
+      flex: 0 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 88px;
     }
-    .art-image {
-      width: 100%;
-      max-height: 400px;
-      object-fit: contain;
-      margin-bottom: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    .image-container img {
+      max-width: 320px;
+      max-height: 320px;
+      width: auto;
+      height: auto;
+      border-radius: 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.22);
+      display: block;
+      background: #d8cfc3;
+    }
+    .content-container {
+      flex: 1 1 0;
     }
     .summary {
       background: #f9f5ee;
       border-radius: 8px;
       padding: 1rem 1.2rem;
-      margin-bottom: 1.7rem;
+      margin-bottom: 1.2rem;
       font-style: italic;
       color: #7a6c5d;
       font-size: 1.05em;
     }
-    .details {
-      margin-bottom: 2rem;
-    }
     .details p {
       margin: 0.5rem 0;
-      font-size: 1rem;
+      font-size: 1.07rem;
+    }
+    h1 {
+      font-family: 'Georgia', serif;
+      color: #5a4632;
+      margin-top: 0;
+      margin-bottom: 1.1rem;
+      font-size: 2rem;
+    }
+    h2 {
+      font-family: 'Georgia', serif;
+      color: #5a4632;
+      margin-top: 2.2rem;
+      margin-bottom: 0.9rem;
+    }
+    h3 {
+      font-family: 'Georgia', serif;
+      color: #5a4632;
+      margin-top: 1.8rem;
+      margin-bottom: 0.7rem;
     }
     .results-table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 2rem;
+      margin: 1.1rem 0 1.8rem 0;
     }
     .results-table th, .results-table td {
       border: 1px solid #ddd;
-      padding: 0.75rem 1rem;
+      padding: 0.78rem 1rem;
       text-align: left;
     }
     .results-table th {
       background-color: #8b6f47;
       color: white;
+      font-size: 1rem;
     }
     .buyer-note {
       background: #f9f5ee;
-      padding: 10px 15px;
-      border-radius: 8px;
       color: #7a6c5d;
+      padding: 0.8rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.99em;
       margin-bottom: 2rem;
-      font-size: 0.95rem;
     }
-    .provenance, .exhibition, .literature {
-      margin-bottom: 2rem;
-    }
-    .provenance ul, .exhibition ul, .literature ul {
+    ul {
       padding-left: 1.2rem;
       color: #5a4632;
     }
@@ -93,24 +118,47 @@
     .back-link:hover {
       background-color: #5a4632;
     }
+    @media (max-width: 850px) {
+      .top-section {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .image-container {
+        width: 100%;
+        justify-content: center;
+        margin-top: 0;
+        margin-bottom: 1rem;
+      }
+      .image-container img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Beyond the Horizon</h1>
-    <img src="images/past7.jpg" alt="Beyond the Horizon Artwork" class="art-image" />
-    <div class="summary">
-      <strong>Beyond the Horizon</strong> offers a breathtaking portrayal of dreamlike landscapes that evoke a sense of mystery and wonder.
+    <div class="top-section">
+      <div class="image-container">
+        <img src="images/past7.jpg" alt="Beyond the Horizon Artwork" />
+      </div>
+      <div class="content-container">
+        <h1>Beyond the Horizon</h1>
+        <div class="summary">
+          <strong>Beyond the Horizon</strong> offers a breathtaking portrayal of dreamlike landscapes that evoke a sense of mystery and wonder.
+        </div>
+        <div class="details">
+          <p><strong>Artist:</strong> Samuel Reid</p>
+          <p><strong>Medium:</strong> Oil on canvas</p>
+          <p><strong>Dimensions:</strong> 115 x 80 cm</p>
+          <p><strong>Year:</strong> 1970</p>
+          <p><strong>Description:</strong> This evocative landscape blends ethereal colors and textured brushwork to create an immersive visual journey.</p>
+          <p><strong>Auction Date:</strong> August 20, 2024</p>
+          <p><strong>Estimate Price:</strong> $20,000 – $35,000</p>
+        </div>
+      </div>
     </div>
-    <div class="details">
-      <p><strong>Artist:</strong> Samuel Reid</p>
-      <p><strong>Medium:</strong> Oil on canvas</p>
-      <p><strong>Dimensions:</strong> 115 x 80 cm</p>
-      <p><strong>Year:</strong> 1970</p>
-      <p><strong>Description:</strong> This evocative landscape blends ethereal colors and textured brushwork to create an immersive visual journey.</p>
-      <p><strong>Auction Date:</strong> August 20, 2024</p>
-      <p><strong>Estimate Price:</strong> $20,000 – $35,000</p>
-    </div>
+
     <h2>Auction Results</h2>
     <table class="results-table">
       <thead>
@@ -137,32 +185,41 @@
           <td>$22,100</td>
           <td>Gallery Horizon</td>
         </tr>
+        <tr>
+          <td>32</td>
+          <td>Misty Morning</td>
+          <td>Oil on canvas</td>
+          <td>$27,800</td>
+          <td>Private Collector</td>
+        </tr>
       </tbody>
     </table>
+
     <div class="buyer-note">
       <strong>Note:</strong> Hammer prices exclude buyer's premium and applicable taxes. For full invoice details, please contact the auction house.
     </div>
-    <div class="provenance">
-      <h3>Provenance</h3>
-      <ul>
-        <li>Private Collection, San Francisco (1975–2000)</li>
-        <li>National Art Museum, Washington D.C. (2000–2018)</li>
-      </ul>
-    </div>
-    <div class="exhibition">
-      <h3>Exhibition History</h3>
-      <ul>
-        <li>Landscapes Reimagined, National Gallery, Washington D.C., 1998</li>
-        <li>Visionary Horizons, San Francisco Museum of Modern Art, 2015</li>
-      </ul>
-    </div>
-    <div class="literature">
-      <h3>Literature</h3>
-      <ul>
-        <li>T. Blackwell, <em>American Landscape Artists</em>, 2005, p. 201</li>
-        <li>S. Turner, <em>The Art of Dreamscapes</em>, 2012, p. 88</li>
-      </ul>
-    </div>
+
+    <h3>Provenance</h3>
+    <ul>
+      <li>Private Collection, San Francisco (1975–2000)</li>
+      <li>National Art Museum, Washington D.C. (2000–2018)</li>
+      <li>Estate Sale, New York (2019–2022)</li>
+    </ul>
+
+    <h3>Exhibition History</h3>
+    <ul>
+      <li>Landscapes Reimagined, National Gallery, Washington D.C., 1998</li>
+      <li>Visionary Horizons, San Francisco Museum of Modern Art, 2015</li>
+      <li>Dreamscapes, Metropolitan Museum of Art, New York, 2021</li>
+    </ul>
+
+    <h3>Literature</h3>
+    <ul>
+      <li>T. Blackwell, <em>American Landscape Artists</em>, 2005, p. 201</li>
+      <li>S. Turner, <em>The Art of Dreamscapes</em>, 2012, p. 88</li>
+      <li>L. Harrington, <em>Modern Landscapes</em>, 2020, p. 45</li>
+    </ul>
+
     <a href="auctions.html" class="back-link">← Back to Auctions</a>
   </div>
 </body>
