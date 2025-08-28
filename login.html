@@ -15,7 +15,8 @@
     <form onsubmit="return frm_chk(event)" method="post">
       <input type="email" name="email" id="email" placeholder="Email" required />
       <input type="password" name="pwd" id="pwd" placeholder="Password" required />
-      <input type="submit" value="Login"/> <span><a href="forgot.html">Forgot your password?</a></span>
+      <input type="submit" value="Login"/> 
+      <span class="forgot-link"><a href="forgot.html">Forgot your password?</a></span>
       <p class="signin-link">Don't have an account? <a href="signup.html">Sign up</a></p>
     </form>
   </div>
@@ -35,10 +36,11 @@
       else{
          document.getElementById("chk").style.display = "block";
         document.getElementById("chk").innerHTML="Enter the valid details";
-        document.getElementById("chk").style.color = "#4b3f33"; 
+        document.getElementById("chk").style.color = "#333"; 
         return false;
       }
     }
   </script>
 </body>
 </html>
+
