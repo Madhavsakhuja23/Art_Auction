@@ -30,12 +30,15 @@ body {
   right: 20px;
   font-size: 24px;
   cursor: pointer;
-  color: #333;
+  color: #4b3f33;
   font-weight: bold;
 }
-#cross a{
+#cross a {
   text-decoration: none;
-  
+  color: #4b3f33;  /* brown color */
+}
+#cross a:hover {
+  color: #3a322b;  /* darker brown on hover */
 }
 h2 {
   text-align: center;
@@ -126,3 +129,4 @@ input[type="submit"]:hover {
     background-color: #f5efe6;
   }
 }
+
