@@ -42,8 +42,8 @@
 
 
       if (pwd.length < 10) {
-        feedback.innerHTML = "⚠ Password must be at least 10 characters long.";
-        feedback.style.color = "#ffd4d4";
+        feedback.innerHTML = "Password must be at least 10 characters long.";
+        feedback.style.color = "#333";
         return false;
       }
       const hasUpperCase = /[A-Z]/.test(pwd);
@@ -51,14 +51,14 @@
 
       if (!hasUpperCase || !hasNumber) {
         feedback.innerHTML = " Password must include a uppercase and a number.";
-        feedback.style.color = " #ffd4d4";
+        feedback.style.color = " #333";
         return false;
       }
 
 
       if (pwd !== cpwd) {
         feedback.innerHTML = "Passwords do not match.";
-        feedback.style.color = "#ffd4d4";
+        feedback.style.color = "#333";
         return false;
       }
 
@@ -73,7 +73,7 @@
       let le=localStorage.getItem("email");
       if (!regex.test(email)) {
         document.getElementById("email_criteria").style.display = "block";
-        document.getElementById("email_criteria").innerText = "⚠ Email must end with @gmail.com or @yahoo.com.";
+        document.getElementById("email_criteria").innerText = "Email must end with @gmail.com or @yahoo.com.";
       }
       if(le===document.getElementById("email").value){
     document.getElementById("email_criteria").innerText="Already have an Existing Account with this Email.";
@@ -89,7 +89,7 @@
       if (!hasUpperCase && !hasLower) {
         document.getElementById("name_criteria").style.display = "block";
         document.getElementById("name_criteria")
-          .innerText = "⚠ Name must contain both uppercase and lowercase letters."
+          .innerText = "Name must contain both uppercase and lowercase letters."
         return false;
       }
       return true;
@@ -112,5 +112,6 @@
   }
   </script>
 </body>
+
 
 </html>
