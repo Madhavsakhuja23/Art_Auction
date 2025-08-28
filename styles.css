@@ -99,8 +99,8 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   top: 100%;
   right: 0;
-  background-color: white;
-  color: black;
+  background-color: #f9f5ee ;
+  color:#3b2d22 ;
   min-width: 160px;
   box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
   z-index: 1;
@@ -112,11 +112,11 @@ h1, h2, h3, h4, h5, h6 {
   padding: 12px 16px;
   display: block;
   text-decoration: none;
-  color: black;
+  color: #3b2d22;
 }
 
 .dropdown-content a:hover {
-  background-color: #f1f1f1;
+  background-color: #f7e4c5;
 }
 /* Hero Carousel */
 .hero-carousel {
@@ -833,7 +833,7 @@ h1, h2, h3, h4, h5, h6 {
 .newsletter-popup button[type="submit"]:hover {
   background-color: #755745; /* darker on hover */
 }
-/* Footer*/
+
 
 /* Footer */
 .site-footer {
@@ -901,17 +901,19 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Newsletter Section */
 .footer-newsletter {
-  margin-top: 1rem;
+  margin-top: 0rem;
 }
 
 .footer-newsletter h4 {
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #4b3f33; /* matching your palette */
+  font-size: 1.1rem;
 }
 
 .footer-newsletter form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .footer-newsletter input[type="email"] {
@@ -931,7 +933,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer-newsletter button {
-   margin-top: 0.5rem;
+  margin-top: 0;
   padding: 0.75rem 1.5rem;
   border: none;
   background-color: #8b6f47;
@@ -940,13 +942,14 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 500;
-  align-self: flex-start; /* Better button alignment */
+  align-self: flex-start;
 }
 
 .footer-newsletter button:hover {
   background-color: #5a4632;
   transform: translateY(-1px);
 }
+
 
 /* Footer Bottom */
 .footer-bottom {
@@ -1011,3 +1014,4 @@ h1, h2, h3, h4, h5, h6 {
   }
 
 }
+
