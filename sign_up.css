@@ -107,25 +107,32 @@
     }
 
     #captcha {
-      min-width: 150px;
-      padding: 10px;
-      border: 2px solid #000;
-      border-radius: 8px;
-      font-weight: bold;
-      letter-spacing: 6px;
-      user-select: none;
-      background: #fff;
-      text-align: center;
-      background-image: url(https://jigyasa-csir.in/v2/auth/assets/captcha-bg.png);
-    }
+  min-width: 100px;   /* smaller than before */
+  padding: 8px;
+  border: 2px solid #000;
+  border-radius: 8px;
+  font-weight: bold;
+  letter-spacing: 6px;
+  user-select: none;
+  background: #fff;
+  text-align: center;
+  background-image: url(https://jigyasa-csir.in/v2/auth/assets/captcha-bg.png);
+}
 
-    .refresh-btn {
-      padding: 8px 10px;
-      border: 1px solid #888;
-      background: #fff;
-      cursor: pointer;
-      border-radius: 6px;
-    }
+.refresh-btn {
+  background-color: #4b3f33;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.refresh-btn:hover {
+  background-color: #3a322b;
+}
 
     .captcha-box {
       display: flex;
