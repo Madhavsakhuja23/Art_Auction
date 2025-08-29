@@ -9,209 +9,161 @@
 </head>
 
 <body>
-  <div id="outer" class="fade-in">
-    <p id="cross"><a href="index.html">&times;</a></p>
-    <h2>Register</h2>
-    <form method="post" id="registerForm">
-      <input type="text" name="Fn" id="fn" placeholder="First Name" required />
-      <div id="name_criteria"></div>
-      <input type="text" name="ln" id="ln" placeholder="Last Name" required />
-      <input type="email" name="email" id="email" placeholder="Email" required />
-      <div id="email_criteria"></div>
-      <input type="text" name="phone_no" id="phone_no" placeholder="Phone Number" required minlength="10"
-        maxlength="10" />
-      <input type="password" name="pwd" id="pwd" placeholder="Password" required />
-      <div id="pwdcriteria"></div>
-      <input type="password" name="cpwd" id="cpwd" placeholder="Confirm Password" required />
-      <div class="text-captcha">
-  <span id="captcha"></span>
-  <button type="button" onclick="generateCaptcha()">↻ Refresh</button>
-</div>
-<input type="text" id="userInput" placeholder="Enter captcha here">
+  <div id="outer">
+    <!-- Normal cross (×) with location -->
+    <p id="cross" onclick="window.location.href='index.html'">&times;</p>
 
-  <!-- Fake reCAPTCHA style -->
-  <div class="captcha-box">
-    <div id="customCheck" class="checkbox" onclick="toggleCheck(event)"></div>
-    <div class="captcha-text">I'm not a robot</div>
-    <div class="recaptcha-logo">
-      <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA">
-    </div>
-  </div>
-  <div class="recaptcha-footer">
-    <span>reCAPTCHA</span>
-    <a href="#">Privacy</a>
-    <a href="#">Terms</a>
-  </div>
-  <p id="result"></p>
+    <h2>Register</h2>
+
+    <form id="registerForm" method="post" novalidate>
+      <input type="text" id="fn" name="Fn" placeholder="First Name" required />
+      <div id="name_criteria"></div>
+
+      <input type="text" id="ln" name="ln" placeholder="Last Name" required />
+
+      <input type="email" id="email" name="email" placeholder="Email" required />
+      <div id="email_criteria"></div>
+
+      <input type="password" id="pwd" name="pwd" placeholder="Password" required />
+      <div id="pwdcriteria"></div>
+
+      <input type="password" id="cpwd" name="cpwd" placeholder="Confirm Password" required />
+
+      <div class="text-captcha">
+        <span id="captcha"></span>
+        <button type="button" class="refresh-btn" id="refreshBtn">↻ Refresh</button>
+      </div>
+
+      <input type="text" id="userInput" placeholder="Enter captcha here" autocomplete="off" />
+
+      <div class="captcha-box" onclick="toggleCheck(event)">
+        <div id="customCheck" class="checkbox" role="checkbox" aria-checked="false"></div>
+        <div>I’m not a robot</div>
+      </div>
+
+      <p id="result"></p>
+
       <input type="submit" value="Register" />
-      <p class="login-link">Already have an account? <a href="login.html">Login</a></p>
+      <p class="signin-link">
+        Already have an account? <a href="login.html">Login</a>
+      </p>
     </form>
   </div>
 
   <script>
+    // Name check
+    function user() {
+      var first = document.getElementById('fn').value.trim();
+      var nc = document.getElementById('name_criteria');
+
+      if (!/[A-Z]/.test(first) || !/[a-z]/.test(first)) {
+        nc.style.display = 'block';
+        nc.textContent = 'Name must have uppercase and lowercase letters.';
+        return false;
+      }
+
+      nc.style.display = 'none';
+      return true;
+    }
+
+    // Password check
     function pwd_check() {
-      const pwd = document.getElementById("pwd").value;
-      const cpwd = document.getElementById("cpwd").value;
-      const feedback = document.getElementById("pwdcriteria");
+      var pwd = document.getElementById('pwd').value.trim();
+      var cpwd = document.getElementById('cpwd').value.trim();
+      var feedback = document.getElementById('pwdcriteria');
 
-      feedback.style.display = "block";
-      // feedback.style.padding = "8px";
-      // feedback.style.borderRadius = "6px";
-      // feedback.style.fontSize = "14px";
-      feedback.style.backgroundColor = "transparent";
-
+      feedback.style.display = 'block';
 
       if (pwd.length < 10) {
-        feedback.innerHTML = "Password must be at least 10 characters long.";
-        feedback.style.color = "#333";
-        return false;
-      }
-      const hasUpperCase = /[A-Z]/.test(pwd);
-      const hasNumber = /\d/.test(pwd);
-
-      if (!hasUpperCase || !hasNumber) {
-        feedback.innerHTML = " Password must include a uppercase and a number.";
-        feedback.style.color = " #333";
+        feedback.textContent = 'Password must be at least 10 characters.';
         return false;
       }
 
+      if (!/[A-Z]/.test(pwd) || !/\d/.test(pwd)) {
+        feedback.textContent = 'Password must include an uppercase and a number.';
+        return false;
+      }
 
       if (pwd !== cpwd) {
-        feedback.innerHTML = "Passwords do not match.";
-        feedback.style.color = "#333";
+        feedback.textContent = 'Passwords do not match.';
         return false;
       }
 
-      feedback.innerHTML = "Password is strong and matches.";
-      feedback.style.color = "green";
+      feedback.textContent = 'Password is strong ✔';
+      feedback.style.color = 'green';
       return true;
-
-
-    }
-  async function emailValidate() {
-    try{
-    let key = "ema_live_myHyeXrksaI52K3z9nDBs1z46RYEjNL9W4CaMKRd";
-    let email = document.getElementById("email").value;
-    let url = `https://api.emailvalidation.io/v1/info?apikey=${key}&email=${email}`;
-    let res = await fetch(url);
-    let result = await res.json();
-
-    const regex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com)$/;
-
-    // Check allowed domains
-    if (!regex.test(email)) {
-      document.getElementById("email_criteria").style.display = "block";
-      document.getElementById("email_criteria").innerText =
-        "Email must end with @gmail.com or @yahoo.com.";
-      return false;
     }
 
-    // Check if already stored
-    let le = localStorage.getItem("email");
-    if (le === email) {
-      document.getElementById("email_criteria").style.display = "block";
-      document.getElementById("email_criteria").innerText =
-        "Already have an existing account with this Email.";
-      return false;
-    }
+    // Email check
+    function emailValidate() {
+      var email = document.getElementById('email').value.trim();
+      var out = document.getElementById('email_criteria');
+      var regex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com)$/;
 
-    // API validation check
-    if (result.state === "deliverable") {
-      document.getElementById("email_criteria").style.display = "none"; // hide error
-      return true;
-    } else {
-      document.getElementById("email_criteria").style.display = "block";
-      document.getElementById("email_criteria").innerText =
-        "Enter the valid email address.";
-      return false;
-    }
-  }
-  catch (err) {
-    document.getElementById("email_criteria").style.display = "block";
-    document.getElementById("email_criteria").innerText = "Email validation failed. Try again.";
-    return false;
-  }
-}
-
-    function user() {
-      let first_name = document.getElementById("fn").value.trim();
-      const hasUpperCase = /[A-Z]/.test(first_name);
-      const hasLower = /[a-z]/.test(first_name);
-      if (!hasUpperCase && !hasLower) {
-        document.getElementById("name_criteria").style.display = "block";
-        document.getElementById("name_criteria")
-          .innerText = "Name must contain both uppercase and lowercase letters."
+      if (!regex.test(email)) {
+        out.style.display = 'block';
+        out.textContent = 'Email must end with @gmail.com or @yahoo.com';
         return false;
       }
+
+      out.style.display = 'none';
       return true;
     }
 
-    let captchaText = "";
-  let isChecked = false;
-
-  function toggleCheck(e) {
-    e.stopPropagation();
-    const box = document.getElementById("customCheck");
-    isChecked = !isChecked;
-    if (isChecked) {
-      box.classList.add("checked");
-      box.innerHTML = "✔";
-    } else {
-      box.classList.remove("checked");
-      box.innerHTML = "";
-    }
-  }
-
-  function generateCaptcha() {
-    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789"; 
-    captchaText = "";
-    for (let i = 0; i < 6; i++) {
-      const randIndex = Math.floor(Math.random() * chars.length);
-      captchaText += chars[randIndex];
-    }
-    document.getElementById("captcha").innerText = captchaText.split("").join(" ");
-  }
-  function verifyAll() {
-    const result = document.getElementById("result");
-    const userValue = document.getElementById("userInput").value.trim();
-
-    if (!isChecked) {
-      result.style.color = "crimson";
-      result.innerText = "⚠️ Please confirm you are not a robot!";
-      return false;
+    // Fake checkbox
+    var isChecked = false;
+    function toggleCheck() {
+      var box = document.getElementById('customCheck');
+      isChecked = !isChecked;
+      box.classList.toggle('checked', isChecked);
+      box.textContent = isChecked ? '✔' : '';
     }
 
-    if (userValue === captchaText) {
-      result.style.color = "green";
-      result.innerText = "✅ Success! Captcha verified.";
-    } else {
-      result.style.color = "red";
-      result.innerText = "❌ Wrong captcha. Try again!";
+    // Captcha
+    var captchaText = '';
+    function generateCaptcha() {
+      var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+      captchaText = Array.from({ length: 6 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+      document.getElementById('captcha').textContent = captchaText.split('').join(' ');
+    }
+
+    function verifyAll() {
+      var result = document.getElementById('result');
+      var userVal = document.getElementById('userInput').value.trim().replace(/\s+/g, '');
+
+      if (!isChecked) {
+        result.style.color = 'crimson';
+        result.textContent = '⚠️ Confirm you are not a robot!';
+        return false;
+      }
+
+      if (userVal.toLowerCase() === captchaText.toLowerCase()) {
+        result.style.color = 'green';
+        result.textContent = '✅ Captcha verified!';
+        return true;
+      }
+
+      result.style.color = 'red';
+      result.textContent = '❌ Wrong captcha. Try again!';
       generateCaptcha();
       return false;
     }
-    return true;
-  }
 
-document.getElementById("registerForm").addEventListener("submit", async function (e) {
-  e.preventDefault();
-  const pwdValid = pwd_check();
-  const emailValid = await emailValidate();
-  const userValid = user();
-  const verifycaptcha_Robot = verifyAll();
-  if (pwdValid && emailValid && userValid && verifycaptcha_Robot) {
-    localStorage.setItem("email", document.getElementById("email").value);
-    localStorage.setItem("password", document.getElementById("pwd").value);
-    localStorage.setItem("Firstname", document.getElementById("fn").value);
+    // Form submit
+    document.getElementById('registerForm').addEventListener('submit', function (e) {
+      e.preventDefault();
 
-    window.location.href = "login.html";
-  }
-  return false;
-});
-window.onload = function() {
-  generateCaptcha();  // ensures captcha is visible when page loads
-};
+      if (user() && pwd_check() && emailValidate() && verifyAll()) {
+        alert('Registration successful!');
+        window.location.href = 'login.html';
+      }
+    });
+
+    // Init
+    window.addEventListener('DOMContentLoaded', generateCaptcha);
+    document.getElementById('refreshBtn').addEventListener('click', generateCaptcha);
   </script>
+
 </body>
 
 
