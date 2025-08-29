@@ -166,13 +166,21 @@ input[type="submit"]:hover {
       margin: 10px 0;
     }
     #captcha {
-      border: 2px solid black; 
-      padding: 5px; 
-      display: inline-block; 
-      font-weight: bold; 
-      background-image: url(https://jigyasa-csir.in/v2/auth/assets/captcha-bg.png);
-      letter-spacing: 5px;
-    }
+  border: 2px solid black; 
+  padding: 5px; 
+  display: inline-block;  
+  min-width: 120px;       
+  min-height: 40px;
+  text-align: center; 
+  font-weight: bold; 
+  font-size: 18px;
+  color: #222;
+  background-image: url("https://jigyasa-csir.in/v2/auth/assets/captcha-bg.png");
+  background-size: cover;   /* make bg fit */
+  letter-spacing: 5px;
+  border-radius: 6px;
+}
+
     #userInput {
   padding: 12px;
   border: none;
