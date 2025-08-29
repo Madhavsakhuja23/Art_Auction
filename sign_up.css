@@ -1,219 +1,221 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5efe6;
-  color: #4b3f33;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  animation: fadeIn 1s ease-in;
-}
-
-#outer {
-  background-color: #d6c4b2;
-  position: relative;
-  padding: 40px 30px;
-  border-radius: 20px;
-  width: 400px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  animation: slideUp 0.6s ease-in-out;
-}
-#cross {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 24px;
-  cursor: pointer;
-  color: #4b3f33;
-  font-weight: bold;
-}
-#cross a {
-  text-decoration: none;
-  color: #4b3f33;  /* brown color */
-}
-#cross a:hover {
-  color: #3a322b;  /* darker brown on hover */
-}
-h2 {
-  text-align: center;
-  color: #3a322b;
-  margin-bottom: 25px;
-  font-size: 1.8rem;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  outline: none;
-  transition: all 0.3s ease;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
-  background-color: #f9f5f0;
-  border: 2px solid #4b3f33;
-  box-shadow: 0 0 5px rgba(75, 63, 51, 0.3);
-}
-
-input[type="submit"] {
-  background-color: #4b3f33;
-  color: #fff;
-  border: none;
-  padding: 12px;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-input[type="submit"]:hover {
-  background-color: #3a322b;
-}
-
-.login-link {
-  text-align: center;
-  margin-top: 15px;
-  color: #3a322b;
-}
-
-.login-link a {
-  color:#12100e;
-  font-weight: 500px;
-}
-
-#pwdcriteria,#name_criteria,#email_criteria{
-  font-size: 0.9rem;
-  margin-top: -10px;
-  padding: 5px 10px;
-  border-radius: 6px;
-  background-color: transparent;
-  color: #4b3f33;
-  display: none;
-}
-.captcha-box {
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      padding: 10px;
-      width: 320px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      user-select: none;
-      margin-bottom: 0; /* remove bottom gap, footer attaches */
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .checkbox {
-      width: 20px;
-      height: 20px;
-      border: 2px solid #666;
-      border-radius: 3px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      color: green;
-    }
-    .checkbox.checked {
-      background: #e6ffe6;
-      border-color: green;
-    }
-    .captcha-text {
-      flex: 1;
-      font-size: 14px;
-    }
-    .recaptcha-logo img {
-      height: 30px;
-      object-fit: contain;
-    }
-
-    .recaptcha-footer {
-      width: 320px;
-      text-align: right;
-      font-size: 10px;
-      color: #888;
-      margin-top: 2px;
-      font-family: Arial, sans-serif;
-    }
-    .recaptcha-footer a {
-      color: #888;
-      text-decoration: none;
-      margin-left: 4px;
-    }
-    .recaptcha-footer a:hover {
-      text-decoration: underline;
-    }
-
-    .text-captcha {
-      margin: 10px 0;
-    }
-    #captcha {
-  border: 2px solid black; 
-  padding: 5px; 
-  display: inline-block;  
-  min-width: 120px;       
-  min-height: 40px;
-  text-align: center; 
-  font-weight: bold; 
-  font-size: 18px;
-  color: #222;
-  background-image: url("https://jigyasa-csir.in/v2/auth/assets/captcha-bg.png");
-  background-size: cover;   /* make bg fit */
-  letter-spacing: 5px;
-  border-radius: 6px;
-}
-
-    #userInput {
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  outline: none;
-  width: 100%; /* makes it full width like other inputs */
-  transition: all 0.3s ease;
-  margin-top: 8px;
-}
-
-#userInput:focus {
-  background-color: #f9f5f0;
-  border: 2px solid #4b3f33;
-  box-shadow: 0 0 5px rgba(75, 63, 51, 0.3);
-}
-/* Animations */
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    background-color: #d9cfc2;
-  }
-  to {
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f5efe6;
+    color: #4b3f33;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    animation: fadeIn 1s ease-in;
   }
-}
+  
+  #outer {
+    background-color: #d6c4b2;
+    position: relative;
+    padding: 40px 30px;
+    border-radius: 20px;
+    width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.6s ease-in-out;
+  }
+  #cross {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #4b3f33;
+    font-weight: bold;
+  }
+  #cross a {
+    text-decoration: none;
+    color: #4b3f33;  /* brown color */
+  }
+  #cross a:hover {
+    color: #3a322b;  /* darker brown on hover */
+  }
+  h2 {
+    text-align: center;
+    color: #3a322b;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    background-color: #f9f5f0;
+    border: 2px solid #4b3f33;
+    box-shadow: 0 0 5px rgba(75, 63, 51, 0.3);
+  }
+  
+  input[type="submit"] {
+    background-color: #4b3f33;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #3a322b;
+  }
+  
+  .login-link {
+    text-align: center;
+    margin-top: 15px;
+    color: #3a322b;
+  }
+  
+  .login-link a {
+    color:#12100e;
+    font-weight: 500px;
+  }
+  
+  #pwdcriteria,#name_criteria,#email_criteria{
+    font-size: 0.9rem;
+    margin-top: -10px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    background-color: transparent;
+    color: #4b3f33;
+    display: none;
+  }
+  .captcha-box {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 10px;
+        width: 320px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        user-select: none;
+        margin-bottom: 0; /* remove bottom gap, footer attaches */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      }
+      .checkbox {
+        width: 20px;
+        height: 20px;
+        border: 2px solid #666;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        color: green;
+      }
+      .checkbox.checked {
+        background: #e6ffe6;
+        border-color: green;
+      }
+      .captcha-text {
+        flex: 1;
+        font-size: 14px;
+      }
+      .recaptcha-logo img {
+        height: 30px;
+        object-fit: contain;
+      }
+  
+      .recaptcha-footer {
+        width: 320px;
+        text-align: right;
+        font-size: 10px;
+        color: #888;
+        margin-top: 2px;
+        font-family: Arial, sans-serif;
+      }
+      .recaptcha-footer a {
+        color: #888;
+        text-decoration: none;
+        margin-left: 4px;
+      }
+      .recaptcha-footer a:hover {
+        text-decoration: underline;
+      }
+  
+      .text-captcha {
+        margin: 10px 0;
+      }
+  #captcha {
+    border: 2px solid black; 
+    display: inline-block;  
+    width: 150px;       
+    height: 40px;
+    text-align: center; 
+    font-weight: bold; 
+    font-size: 18px;
+    line-height: 40px;  /* vertically center text */
+    color: #222;
+    background-image: url("https://jigyasa-csir.in/v2/auth/assets/captcha-bg.png");
+    background-size: cover;   
+    letter-spacing: 5px;
+    border-radius: 6px;
+  }
+  
+  
+      #userInput {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    width: 100%; /* makes it full width like other inputs */
+    transition: all 0.3s ease;
+    margin-top: 8px;
+  }
+  
+  #userInput:focus {
+    background-color: #f9f5f0;
+    border: 2px solid #4b3f33;
+    box-shadow: 0 0 5px rgba(75, 63, 51, 0.3);
+  }
+  /* Animations */
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      background-color: #d9cfc2;
+    }
+    to {
+      background-color: #f5efe6;
+    }
+  
+  }
