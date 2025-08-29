@@ -14,17 +14,17 @@
     height: 100vh;
     animation: fadeIn 1s ease-in;
   }
-  
   #outer {
-    background-color: #d6c4b2;
-    position: relative;
-    padding: 40px 30px;
-    border-radius: 20px;
-    width: 400px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    animation: slideUp 0.6s ease-in-out;
-  }
-  #cross {
+  background-color: #d6c4b2;
+  position: relative;
+  padding: 70px 30px 40px 30px;   /* ⬅ added extra top padding */
+  border-radius: 20px;
+  width: 400px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.6s ease-in-out;
+  /* border: 2px solid #4b3f33;      ⬅ adds border */
+}
+  /* #cross {
     position: absolute;
     top: 10px;
     right: 20px;
@@ -32,7 +32,17 @@
     cursor: pointer;
     color: #4b3f33;
     font-weight: bold;
-  }
+  } */
+  #cross {
+  position: absolute;
+  top: 15px;    /* ⬅ lowered slightly */
+  right: 20px;
+  font-size: 28px;   /* ⬅ bigger, clearer */
+  cursor: pointer;
+  color: #4b3f33;
+  font-weight: bold;
+  z-index: 10;
+}
   #cross a {
     text-decoration: none;
     color: #4b3f33;  /* brown color */
