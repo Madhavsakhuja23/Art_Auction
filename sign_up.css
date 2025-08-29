@@ -14,15 +14,15 @@
     height: 100vh;
     animation: fadeIn 1s ease-in;
   }
-  #outer {
+#outer {
   background-color: #d6c4b2;
   position: relative;
-  padding: 70px 30px 40px 30px;   /* ⬅ added extra top padding */
+  padding: 80px 30px 40px 30px; /* ⬅ extra space at top */
   border-radius: 20px;
   width: 400px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   animation: slideUp 0.6s ease-in-out;
-  /* border: 2px solid #4b3f33;      ⬅ adds border */
+  overflow: hidden; /* prevents content overflow */
 }
   /* #cross {
     position: absolute;
@@ -173,24 +173,28 @@
       }
   
       .text-captcha {
-        margin: 10px 0;
-      }
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* spacing between captcha & refresh */
+}
   #captcha {
-    border: 2px solid black; 
-    display: inline-block;  
-    width: 150px;       
-    height: 40px;
-    text-align: center; 
-    font-weight: bold; 
-    font-size: 18px;
-    line-height: 40px;  /* vertically center text */
-    color: #222;
-    background-image: url("https://jigyasa-csir.in/v2/auth/assets/captcha-bg.png");
-    background-size: cover;   
-    letter-spacing: 5px;
-    border-radius: 6px;
-  }
-  
+  border: 2px solid black; 
+  display: inline-block;  
+  min-width: 150px;
+  max-width: 100%;     /* never go outside parent */
+  height: 40px;
+  text-align: center; 
+  font-weight: bold; 
+  font-size: 18px;
+  line-height: 40px;  
+  color: #222;
+  background-image: url("https://jigyasa-csir.in/v2/auth/assets/captcha-bg.png");
+  background-size: cover;   
+  letter-spacing: 3px; /* reduced spacing */
+  border-radius: 6px;
+  word-break: break-all; /* ensures wrapping if needed */
+}
   
       #userInput {
     padding: 12px;
