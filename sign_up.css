@@ -116,7 +116,7 @@
   user-select: none;
   background: #fff;
   text-align: center;
-  background-image: url(https://jigyasa-csir.in/v2/auth/assets/captcha-bg.png);
+  /* background-image: url(https://jigyasa-csir.in/v2/auth/assets/captcha-bg.png); */
 }
 
 .refresh-btn {
