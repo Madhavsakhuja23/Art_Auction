@@ -23,6 +23,27 @@
       <input type="password" name="pwd" id="pwd" placeholder="Password" required />
       <div id="pwdcriteria"></div>
       <input type="password" name="cpwd" id="cpwd" placeholder="Confirm Password" required />
+      <div class="text-captcha">
+    <span id="captcha"></span>
+    <button  type="button" onclick="generateCaptcha()">↻ Refresh</button>
+    <br><br>
+    <input type="text" id="userInput" placeholder="Enter captcha here">
+  </div>
+
+  <!-- Fake reCAPTCHA style -->
+  <div class="captcha-box">
+    <div id="customCheck" class="checkbox" onclick="toggleCheck(event)"></div>
+    <div class="captcha-text">I'm not a robot</div>
+    <div class="recaptcha-logo">
+      <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA">
+    </div>
+  </div>
+  <div class="recaptcha-footer">
+    <span>reCAPTCHA</span>
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+  </div>
+  <p id="result"></p>
       <input type="submit" value="Register" />
       <p class="login-link">Already have an account? <a href="login.html">Login</a></p>
     </form>
@@ -125,13 +146,61 @@
       }
       return true;
     }
+
+    let captchaText = "";
+  let isChecked = false;
+
+  function toggleCheck(e) {
+    e.stopPropagation();
+    const box = document.getElementById("customCheck");
+    isChecked = !isChecked;
+    if (isChecked) {
+      box.classList.add("checked");
+      box.innerHTML = "✔";
+    } else {
+      box.classList.remove("checked");
+      box.innerHTML = "";
+    }
+  }
+
+  function generateCaptcha() {
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789"; 
+    captchaText = "";
+    for (let i = 0; i < 6; i++) {
+      const randIndex = Math.floor(Math.random() * chars.length);
+      captchaText += chars[randIndex];
+    }
+    document.getElementById("captcha").innerText = captchaText.split("").join(" ");
+  }
+  function verifyAll() {
+    const result = document.getElementById("result");
+    const userValue = document.getElementById("userInput").value.trim();
+
+    if (!isChecked) {
+      result.style.color = "crimson";
+      result.innerText = "⚠️ Please confirm you are not a robot!";
+      return false;
+    }
+
+    if (userValue === captchaText) {
+      result.style.color = "green";
+      result.innerText = "✅ Success! Captcha verified.";
+    } else {
+      result.style.color = "red";
+      result.innerText = "❌ Wrong captcha. Try again!";
+      generateCaptcha();
+      return false;
+    }
+    return true;
+  }
+
 document.getElementById("registerForm").addEventListener("submit", async function (e) {
   e.preventDefault();
   const pwdValid = pwd_check();
   const emailValid = await emailValidate();
   const userValid = user();
-
-  if (pwdValid && emailValid && userValid) {
+  const verifycaptcha_Robot = verifyAll();
+  if (pwdValid && emailValid && userValid && verifycaptcha_Robot) {
     localStorage.setItem("email", document.getElementById("email").value);
     localStorage.setItem("password", document.getElementById("pwd").value);
     localStorage.setItem("Firstname", document.getElementById("fn").value);

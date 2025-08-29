@@ -108,7 +108,87 @@ input[type="submit"]:hover {
   color: #4b3f33;
   display: none;
 }
+.captcha-box {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 10px;
+      width: 320px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: 0; /* remove bottom gap, footer attaches */
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #666;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: green;
+    }
+    .checkbox.checked {
+      background: #e6ffe6;
+      border-color: green;
+    }
+    .captcha-text {
+      flex: 1;
+      font-size: 14px;
+    }
+    .recaptcha-logo img {
+      height: 30px;
+      object-fit: contain;
+    }
 
+    .recaptcha-footer {
+      width: 320px;
+      text-align: right;
+      font-size: 10px;
+      color: #888;
+      margin-top: 2px;
+      font-family: Arial, sans-serif;
+    }
+    .recaptcha-footer a {
+      color: #888;
+      text-decoration: none;
+      margin-left: 4px;
+    }
+    .recaptcha-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .text-captcha {
+      margin: 10px 0;
+    }
+    #captcha {
+      border: 2px solid black; 
+      padding: 5px; 
+      display: inline-block; 
+      font-weight: bold; 
+      background-image: url(https://jigyasa-csir.in/v2/auth/assets/captcha-bg.png);
+      letter-spacing: 5px;
+    }
+    #userInput {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  width: 100%; /* makes it full width like other inputs */
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+
+#userInput:focus {
+  background-color: #f9f5f0;
+  border: 2px solid #4b3f33;
+  box-shadow: 0 0 5px rgba(75, 63, 51, 0.3);
+}
 /* Animations */
 @keyframes slideUp {
   from {
@@ -129,4 +209,3 @@ input[type="submit"]:hover {
     background-color: #f5efe6;
   }
 }
-
