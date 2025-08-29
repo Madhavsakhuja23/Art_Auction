@@ -10,7 +10,7 @@
 
 <body>
   <div id="outer" class="fade-in">
-    <p id="cross"><a href="index.html">&cross;</a></p>
+    <p id="cross"><a href="index.html">&times;</a></p>
     <h2>Register</h2>
     <form method="post" id="registerForm">
       <input type="text" name="Fn" id="fn" placeholder="First Name" required />
@@ -209,9 +209,12 @@ document.getElementById("registerForm").addEventListener("submit", async functio
   }
   return false;
 });
-generateCaptcha();
+window.onload = function() {
+  generateCaptcha();  // ensures captcha is visible when page loads
+};
   </script>
 </body>
 
 
 </html>
+
