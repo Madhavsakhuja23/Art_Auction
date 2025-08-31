@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Live Bidding Room</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f5efe6;
+      margin: 0;  
+      padding: 0;
+      color: #584430;
+    }
+
+    /* Header */
+    header {
+      background: #5a4632;
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Georgia', serif;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.6rem;
+    }
+
+    header button {
+      background: #fff;
+      color: #5a4632;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    header button:hover {
+      background: #cbb8a9;
+    }
+
+    /* Container */
+    .bidding-container {
+      background: #fff;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      width: 90%;
+      max-width: 1100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    /* Artwork */
+    .artwork {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .artwork img {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      max-height: 500px;
+      object-fit: cover;
+    }
+
+    /* Auction Details */
+    .details h2 {
+      margin: 0;
+      font-size: 2rem;
+      font-family: 'Georgia', serif;
+      color: #5a4632;
+    }
+
+    .timer {
+      margin: 1rem 0;
+      font-size: 1.2rem;
+      color: #ad8861;
+      font-weight: bold;
+    }
+
+    .progress-bar {
+      background: #eee;
+      border-radius: 8px;
+      height: 12px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+    .progress {
+      background: #ad8861;
+      height: 100%;
+      width: 100%;
+      transition: width 1s linear;
+    }
+
+    .current-bid {
+      font-size: 1.4rem;
+      margin: 1rem 0;
+      color: #2e2e2e;
+    }
+
+    .next-bid {
+      font-size: 1rem;
+      color: #5b4833;
+    }
+
+    /* Form */
+    .bid-form {
+      margin-top: 1rem;
+    }
+
+    .bid-form input {
+      padding: 0.7rem;
+      width: 65%;
+      border: 1px solid #cbb8a9;
+      border-radius: 8px;
+      margin-right: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .bid-form button {
+      padding: 0.7rem 1.2rem;
+      background: #725940;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+
+    .bid-form button:hover {
+      background: #6a5c4c;
+    }
+
+    .error-msg {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+    }
+
+    /* Leaderboard */
+    .leaderboard {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 12px;
+      background: #f5efe6;
+    }
+
+    .leaderboard h3 {
+      margin-bottom: 0.5rem;
+      color: #4b3f33;
+    }
+
+    .leaderboard ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .leaderboard li {
+      background: #fff;
+      margin: 0.3rem 0;
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      font-weight: 500;
+    }
+
+    .highlight {
+      background: #ddb081 !important;
+      font-weight: bold;
+    }
+
+    /* Bid history */
+    .bid-history {
+      margin-top: 1.5rem;
+      max-height: 200px;
+      overflow-y: auto;
+      border-top: 1px solid #eee;
+      padding-top: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .bid-history p {
+      margin: 0.4rem 0;
+      padding: 0.4rem;
+      background: #f6f3ef;
+      border-radius: 6px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    /* Modal */
+    .winner {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .winner-content {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      max-width: 450px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      animation: zoomIn 0.4s ease;
+    }
+
+    .winner-content h4 {
+      color:#694e32;
+      font-family: 'Georgia', serif;
+      margin-bottom: 1rem;
+    }
+
+    .winner-content ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .winner-content button {
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      background:#6f5439 ;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight:500;
+    }
+    .winner-content button:hover {
+      background:#5a4632 ;
+    }
+
+    @keyframes zoomIn {
+      from {transform: scale(0.7);}
+      to {transform: scale(1);}
+    }
+
+    /* Responsive */
+    @media(max-width: 768px) {
+      .bidding-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bidding-container">
+    <!-- Left: Artwork -->
+    <div class="artwork">
+      <img src="images/c2.jpg" alt="Artwork">
+    </div>
+
+    <!-- Right: Auction Details -->
+    <div class="details">
+      <h2>Eyes Never Lies</h2>
+      <div class="timer" id="timer">Auction ends in: 02:00</div>
+      <div class="progress-bar"><div id="progress" class="progress"></div></div>
+      <div class="current-bid">Current Bid: $<span id="currentBid">900</span></div>
+      <div class="next-bid">Next Minimum Bid: $<span id="nextBid">920</span></div>
+
+      <form class="bid-form" onsubmit="placeBid(event)">
+        <input type="number" id="bidAmount" placeholder="Enter your bid" required>
+        <button type="submit">Place Bid</button>
+        <div id="errorMsg" class="error-msg"></div>
+      </form>
+
+      <div class="leaderboard">
+        <h3>Top 3 Bidders</h3>
+        <ul id="leaderboardList">
+          <li>$900 - Starting Bid</li>
+        </ul>
+      </div>
+
+      <div class="bid-history" id="bidHistory">
+        <p>Starting bid: $900</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Winner/Loser Modal -->
+  <div class="winner" id="winnerModal">
+    <div class="winner-content">
+      <h4 id="winnerText"></h4>
+      <h3>Top 3 Bidders</h3>
+      <ul id="modalLeaderboard"></ul>
+      <button onclick="window.location.href='auctions.html'">Back to Auctions</button>
+    </div>
+  </div>
+
+  <canvas id="confettiCanvas" style="position:fixed;top:0;left:0;pointer-events:none;z-index:999;display:none;"></canvas>
+
+  <script>
+    let currentBid = 900;
+    let timeLeft = 120; // 2 minutes
+    let bidders = [];
+    const minIncrement = 20;
+    const timerEl = document.getElementById("timer");
+    const bidEl = document.getElementById("currentBid");
+    const nextBidEl = document.getElementById("nextBid");
+    const bidHistory = document.getElementById("bidHistory");
+    const leaderboardList = document.getElementById("leaderboardList");
+    const winnerModal = document.getElementById("winnerModal");
+    const winnerText = document.getElementById("winnerText");
+    const modalLeaderboard = document.getElementById("modalLeaderboard");
+    const progress = document.getElementById("progress");
+    const totalTime = timeLeft;
+    const errorMsg = document.getElementById("errorMsg");
+
+    let youPlacedBid = false;
+
+    // Countdown Timer
+    function updateTimer() {
+      let minutes = Math.floor(timeLeft / 60);
+      let seconds = timeLeft % 60;
+      timerEl.textContent = `Auction ends in: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+      progress.style.width = (timeLeft/totalTime)*100 + "%";
+
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        timerEl.textContent = "Auction Ended!";
+        declareWinner();
+      }
+      timeLeft--;
+    }
+    const timerInterval = setInterval(updateTimer, 1000);
+
+    // Place Bid
+    function placeBid(e) {
+      e.preventDefault();
+      errorMsg.textContent = "";
+      let bidInput = document.getElementById("bidAmount");
+      let bidValue = parseInt(bidInput.value);
+
+      if (bidValue >= currentBid + minIncrement) {
+        currentBid = bidValue;
+        bidEl.textContent = currentBid;
+        nextBidEl.textContent = currentBid + minIncrement;
+        addBid("You", bidValue);
+        youPlacedBid = true;
+      } else {
+        errorMsg.textContent = `Your bid must be at least $${currentBid + minIncrement}`;
+      }
+
+      bidInput.value = "";
+    }
+
+    // Add Bid
+    function addBid(user, amount) {
+      bidHistory.innerHTML = `<p>${user} placed a bid: $${amount}</p>` + bidHistory.innerHTML;
+      bidders.push({user, amount});
+      updateLeaderboard();
+    }
+
+    // Update leaderboard
+    function updateLeaderboard() {
+      bidders.sort((a,b) => b.amount - a.amount);
+      let top3 = bidders.slice(0,3);
+      leaderboardList.innerHTML = top3.map(b => 
+        `<li class="${b.user==='You'?'highlight':''}">${b.user} - $${b.amount}</li>`
+      ).join("");
+    }
+
+    // Simulate Other Bidders
+    function simulateOtherBids() {
+      if (timeLeft > 0 && Math.random() < 0.5) {
+        let increase = Math.floor(Math.random() * 50) + minIncrement;
+        currentBid += increase;
+        bidEl.textContent = currentBid;
+        nextBidEl.textContent = currentBid + minIncrement;
+        addBid("Bidder#" + Math.floor(Math.random() * 100), currentBid);
+      }
+    }
+    setInterval(simulateOtherBids, 6000);
+
+    // Declare winner
+    function declareWinner() {
+      if (bidders.length === 0) return;
+      bidders.sort((a,b) => b.amount - a.amount);
+      let winner = bidders[0];
+
+      // Populate modal leaderboard
+      let top3 = bidders.slice(0,3);
+      modalLeaderboard.innerHTML = top3.map(b => 
+        `<li class="${b.user==='You'?'highlight':''}">${b.user} - $${b.amount}</li>`
+      ).join("");
+
+      if (winner.user === "You") {
+        winnerText.textContent = `Congratulations! You won the auction with $${winner.amount}`;
+        launchConfetti();
+      } else {
+        winnerText.textContent = "Better luck next time, thanks for bidding on Autistiq!";
+      }
+      winnerModal.style.display = "flex";
+    }
+
+    // Confetti effect
+    function launchConfetti() {
+      const canvas = document.getElementById("confettiCanvas");
+      const ctx = canvas.getContext("2d");
+      canvas.style.display = "block";
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const confetti = [];
+      for (let i = 0; i < 150; i++) {
+        confetti.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          r: Math.random() * 6 + 4,
+          d: Math.random() * 0.5 + 0.5,
+          color: `hsl(${Math.random() * 360}, 100%, 50%)`
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        confetti.forEach(p => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI, false);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+        });
+        update();
+      }
+
+      function update() {
+        confetti.forEach(p => {
+          p.y += p.d * 3;
+          if (p.y > canvas.height) {
+            p.y = -10;
+            p.x = Math.random() * canvas.width;
+          }
+        });
+      }
+
+      setInterval(draw, 20);
+    }
+  </script>
+</body>
+</html>
