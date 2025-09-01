@@ -21,14 +21,15 @@
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar">
+    <nav class="navbar">
     <div class="logo">Aurtistiq</div>
 
      <div class="nav-search">
     <input type="text" id="navSearch" placeholder="Search artworks…">
     <span class="search-icon"></span>
   </div>
-
+  <div class="nav-menu">
+    <div class="hamburger" id="hamburger">&#9776;</div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="collect.html">Collect</a></li>
@@ -36,11 +37,13 @@
       <li id="Signin"><a href="signup.html">Sign In</a></li>
       <li id="username"></li>
     </ul>
+    </div>
     <div class="dropdown-content" id="dropdown">
         <a href="profile.html" style="text-decoration: none;">View Profile</a>
         <a href="settings.html">Settings</a>
         <a href="index.html" id="logout">Log Out</a>
     </div>
+    
   </nav>
   <!-- Filter Sidebar -->
 <div id="filterSidebar" class="filter-sidebar">

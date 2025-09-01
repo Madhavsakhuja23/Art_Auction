@@ -354,6 +354,52 @@ h1, h2, h3, h4, h5, h6 {
     width: 180px;
   }
 }
+@media (max-width: 768px) {
+  .nav-menu {
+    position: relative;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;       /* below hamburger */
+    right: 0;        /* align with right edge */
+    flex-direction: column;
+    background: #f9f5ee;
+    width: 220px;    /* adjust width */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    z-index: 2000;
+    text-align: center; /* center content inside */
+  }
+
+  .nav-links li {
+    padding: 12px 0; /* spacing for each item */
+  }
+
+  .nav-links a {
+    display: block;
+    width: 100%;
+    text-align: center;   /* center links */
+    color: #3b2d22;
+    text-decoration: none;
+  }
+
+  .nav-links.active {
+    max-height: 300px;
+  }
+  .nav-links a:hover {
+    border-bottom: none;   /* remove underline */
+  }
+  .carousel-caption{
+    display: none;
+  }
+  .hamburger {
+    display: block;
+    cursor: pointer;
+  }
+}
 
 
 /* Filter Sidebar */

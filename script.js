@@ -48,6 +48,15 @@ function userdisplay() {
 }
 
 document.addEventListener("DOMContentLoaded", userdisplay);
+// navbar hamburger
+const hamburger = document.querySelector(".hamburger");
+const navLinksContainer = document.querySelector(".nav-links");
+
+if (hamburger && navLinksContainer) {
+  hamburger.addEventListener("click", () => {
+    navLinksContainer.classList.toggle("active");
+  });
+}
 // logout
 let lout=document.getElementById("logout");
 lout.addEventListener("click",()=>{
