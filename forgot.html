@@ -3,25 +3,164 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Password Change</title>
+  <title>Forgot Password</title>
   <link rel="stylesheet" href="forgot.css" />
+  <style>
+    /* Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Manrope', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5efe6;
+      color: #4b3f33;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      background: #faf7f2;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      width: 900px;
+      max-width: 95%;
+    }
+
+    /* Left side illustration */
+    .illustration {
+      flex: 1;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+
+    .illustration img {
+      max-width: 90%;
+      height: auto;
+    }
+
+    /* Right form */
+    .form-section {
+      flex: 1;
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .form-section h1 {
+      font-size: 1.8rem;
+      color: #3a322b;
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #3a322b;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      padding: 14px;
+      border: 1.5px solid #d6c4b2;
+      border-radius: 8px;
+      font-size: 1rem;
+      background-color: #fdfaf6;
+      color: #4b3f33;
+      outline: none;
+      transition: 0.3s;
+      width: 100%;
+    }
+
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      border-color: #4b3f33;
+      background-color: #fff;
+    }
+
+    button[type="submit"] {
+      background-color: #4b3f33;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #3a322b;
+    }
+
+    .links {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .links a {
+      color: #4b3f33;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* Feedback / error messages */
+    #emailexist,
+    #pwdcriteria {
+      font-size: 0.9rem;
+      margin-top: -10px;
+      margin-bottom: -5px;
+      color: #d9534f;
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="settings-container">
-    <h1>Password Reset</h1>
-    <form id="settingsForm" onsubmit="return pwd_check()">
-      <label for="email">Email</label>
-      <input type="email" id="email" placeholder="Enter your email" required />
-      <div id="emailexist" style="color:red;"></div>
+  <div class="container">
+    <!-- Left Illustration -->
+    <div class="illustration">
+      <img src="images\forgot.png" alt="Forgot Password Illustration">
+    </div>
 
-      <input type="password" name="pwd" id="pwd" placeholder="New Password" required />
-      <div id="pwdcriteria" style="display:none;"></div>
+    <!-- Right Form -->
+    <div class="form-section">
+      <h1>Forgot Password</h1>
+      <form id="settingsForm" onsubmit="return pwd_check()">
+        <label for="email">Enter the email address you used to register</label>
+        <input type="email" id="email" placeholder="Please enter your email id" required />
+        <div id="emailexist"></div>
 
-      <input type="password" name="cpwd" id="cpwd" placeholder="Confirm Password" required />
+        <input type="password" name="pwd" id="pwd" placeholder="New Password" required />
+        <div id="pwdcriteria"></div>
 
-      <button type="submit">Save my details</button>
-    </form>
+        <input type="password" name="cpwd" id="cpwd" placeholder="Confirm Password" required />
+
+        <button type="submit">Change Password</button>
+
+        <div class="links">
+          <a href="#">Terms & Conditions</a> • <a href="#">Privacy Policy</a>
+        </div>
+      </form>
+    </div>
   </div>
 
   <script>
@@ -37,53 +176,44 @@
       const cpwd = document.getElementById("cpwd").value;
       const feedback = document.getElementById("pwdcriteria");
 
-      // Reset feedback visibility and messages
       feedback.style.display = "block";
       emailexist.textContent = "";
       feedback.textContent = "";
 
-      // Check if email matches
       if (savedEmail !== enteredEmail) {
         emailexist.textContent = "No account with this email.";
         return false;
       }
 
-      // Password length
       if (pwd.length < 10) {
         feedback.textContent = "Password must be at least 10 characters long.";
         feedback.style.color = "#d9534f";
         return false;
       }
 
-      // Uppercase and number check
       if (!/[A-Z]/.test(pwd) || !/\d/.test(pwd)) {
         feedback.textContent = "Password must include an uppercase letter and a number.";
         feedback.style.color = "#d9534f";
         return false;
       }
 
-      // Confirm match
       if (pwd !== cpwd) {
         feedback.textContent = "Passwords do not match.";
         feedback.style.color = "#d9534f";
         return false;
       }
 
-      // ✅ All OK
       feedback.textContent = "Password is strong and matches.";
       feedback.style.color = "green";
 
-      // Save password (demo only, insecure)
       localStorage.setItem("password", pwd);
 
-      // Redirect to home
       setTimeout(() => {
-        window.location.href = "index.html";
-      }, 1000); // delay so user sees message
+        window.location.href = "home.html";
+      }, 1000);
 
-      return false; // prevent form from submitting the default way
+      return false;
     }
   </script>
 </body>
 </html>
-
