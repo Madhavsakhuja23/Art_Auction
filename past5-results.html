@@ -59,29 +59,34 @@
       margin: 0.5rem 0;
       font-size: 1.07rem;
     }
-    h1 {
+    h1, h2, h3 {
       font-family: 'Georgia', serif;
       color: #5a4632;
+    }
+    h1 {
       margin-top: 0;
       margin-bottom: 1.1rem;
       font-size: 2rem;
     }
     h2 {
-      font-family: 'Georgia', serif;
-      color: #5a4632;
       margin-top: 2.2rem;
       margin-bottom: 0.9rem;
     }
     h3 {
-      font-family: 'Georgia', serif;
-      color: #5a4632;
       margin-top: 1.8rem;
       margin-bottom: 0.7rem;
+    }
+    /* Table wrapper for responsiveness */
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 1.8rem;
     }
     .results-table {
       width: 100%;
       border-collapse: collapse;
-      margin: 1.1rem 0 1.8rem 0;
+      min-width: 600px; /* keeps readability */
     }
     .results-table th, .results-table td {
       border: 1px solid #ddd;
@@ -107,7 +112,8 @@
     }
     .back-link {
       display: inline-block;
-      padding: 0.6rem 1.2rem;
+      margin-top: 1.5rem;
+      padding: 0.7rem 1.2rem;
       background-color: #8b6f47;
       color: white;
       border-radius: 7px;
@@ -132,6 +138,10 @@
       .image-container img {
         max-width: 100%;
         height: auto;
+      }
+      .back-link {
+        width: 100%;
+        text-align: center;
       }
     }
   </style>
@@ -160,40 +170,42 @@
     </div>
 
     <h2>Auction Results</h2>
-    <table class="results-table">
-      <thead>
-        <tr>
-          <th>Lot Number</th>
-          <th>Title</th>
-          <th>Medium</th>
-          <th>Hammer Price</th>
-          <th>Buyer</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>9</td>
-          <td>Portrait Magic</td>
-          <td>Oil on canvas</td>
-          <td>$12,300</td>
-          <td>Collector E (Rome)</td>
-        </tr>
-        <tr>
-          <td>10</td>
-          <td>Silent Gaze</td>
-          <td>Oil on canvas</td>
-          <td>$7,800</td>
-          <td>Private Buyer</td>
-        </tr>
-        <tr>
-          <td>11</td>
-          <td>Reflective Mood</td>
-          <td>Oil on panel</td>
-          <td>$6,500</td>
-          <td>Gallery Moderne</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Lot Number</th>
+            <th>Title</th>
+            <th>Medium</th>
+            <th>Hammer Price</th>
+            <th>Buyer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>9</td>
+            <td>Portrait Magic</td>
+            <td>Oil on canvas</td>
+            <td>$12,300</td>
+            <td>Collector E (Rome)</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>Silent Gaze</td>
+            <td>Oil on canvas</td>
+            <td>$7,800</td>
+            <td>Private Buyer</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td>Reflective Mood</td>
+            <td>Oil on panel</td>
+            <td>$6,500</td>
+            <td>Gallery Moderne</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <div class="buyer-note">
       <strong>Note:</strong> Hammer prices do not include buyer's premium and applicable taxes. Contact the auction house for full purchase details.
