@@ -78,10 +78,19 @@
       margin-top: 1.8rem;
       margin-bottom: 0.7rem;
     }
+
+    /* Responsive table wrapper */
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
     .results-table {
       width: 100%;
       border-collapse: collapse;
       margin: 1.1rem 0 1.8rem 0;
+      min-width: 600px; /* keeps columns readable */
     }
     .results-table th, .results-table td {
       border: 1px solid #ddd;
@@ -93,6 +102,7 @@
       color: white;
       font-size: 1rem;
     }
+
     .buyer-note {
       background: #f9f5ee;
       color: #7a6c5d;
@@ -160,40 +170,42 @@
     </div>
 
     <h2>Auction Results</h2>
-    <table class="results-table">
-      <thead>
-        <tr>
-          <th>Lot Number</th>
-          <th>Title</th>
-          <th>Medium</th>
-          <th>Hammer Price</th>
-          <th>Buyer</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>30</td>
-          <td>Beyond the Horizon</td>
-          <td>Oil on canvas</td>
-          <td>$33,500</td>
-          <td>Collector G (San Francisco)</td>
-        </tr>
-        <tr>
-          <td>31</td>
-          <td>Whispering Winds</td>
-          <td>Oil on panel</td>
-          <td>$22,100</td>
-          <td>Gallery Horizon</td>
-        </tr>
-        <tr>
-          <td>32</td>
-          <td>Misty Morning</td>
-          <td>Oil on canvas</td>
-          <td>$27,800</td>
-          <td>Private Collector</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Lot Number</th>
+            <th>Title</th>
+            <th>Medium</th>
+            <th>Hammer Price</th>
+            <th>Buyer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>30</td>
+            <td>Beyond the Horizon</td>
+            <td>Oil on canvas</td>
+            <td>$33,500</td>
+            <td>Collector G (San Francisco)</td>
+          </tr>
+          <tr>
+            <td>31</td>
+            <td>Whispering Winds</td>
+            <td>Oil on panel</td>
+            <td>$22,100</td>
+            <td>Gallery Horizon</td>
+          </tr>
+          <tr>
+            <td>32</td>
+            <td>Misty Morning</td>
+            <td>Oil on canvas</td>
+            <td>$27,800</td>
+            <td>Private Collector</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <div class="buyer-note">
       <strong>Note:</strong> Hammer prices exclude buyer's premium and applicable taxes. For full invoice details, please contact the auction house.
