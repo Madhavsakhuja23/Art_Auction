@@ -11,6 +11,7 @@
       color: #4b3f33;
       margin: 0;
       padding: 24px;
+      line-height: 1.6;
     }
     .container {
       max-width: 940px;
@@ -25,13 +26,14 @@
       gap: 2.2rem;
       margin-bottom: 2rem;
       align-items: flex-start;
+      flex-wrap: wrap;
     }
     .image-container {
       flex: 0 0 auto;
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      margin-top: 88px; /* pushes image down slightly */
+      margin-top: 20px;
     }
     .image-container img {
       max-width: 320px;
@@ -44,7 +46,7 @@
       background: #d8cfc3;
     }
     .content-container {
-      flex: 1 1 0;
+      flex: 1 1 300px;
     }
     .summary {
       background: #f9f5ee;
@@ -66,33 +68,40 @@
       margin-bottom: 1.1rem;
       font-size: 2rem;
     }
-    h2 {
+    h2, h3 {
       font-family: 'Georgia', serif;
       color: #5a4632;
       margin-top: 2.2rem;
       margin-bottom: 0.9rem;
     }
-    h3 {
-      font-family: 'Georgia', serif;
-      color: #5a4632;
-      margin-top: 1.8rem;
-      margin-bottom: 0.6rem;
+
+    /* Table wrapper for responsiveness */
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 1.5rem;
     }
     .results-table {
       width: 100%;
       border-collapse: collapse;
-      margin: 1.1rem 0 1.8rem 0;
+      min-width: 600px; /* keeps table readable */
     }
     .results-table th, .results-table td {
       border: 1px solid #ddd;
       padding: 0.78rem 1rem;
       text-align: left;
+      white-space: nowrap;
     }
     .results-table th {
       background-color: #8b6f47;
       color: white;
       font-size: 1rem;
     }
+    .results-table tbody tr:hover {
+      background-color: #f1ebe3;
+    }
+
     .buyer-note {
       background: #f9f5ee;
       color: #7a6c5d;
@@ -107,7 +116,7 @@
     }
     .back-link {
       display: inline-block;
-      margin-top: 1.8rem;
+      margin-top: 2rem;
       padding: 0.7rem 1.3rem;
       background-color: #8b6f47;
       color: #fff;
@@ -119,6 +128,8 @@
     .back-link:hover {
       background-color: #5a4632;
     }
+
+    /* Mobile adjustments */
     @media (max-width: 850px) {
       .top-section {
         flex-direction: column;
@@ -161,40 +172,42 @@
     </div>
 
     <h2>Auction Results</h2>
-    <table class="results-table">
-      <thead>
-        <tr>
-          <th>Lot Number</th>
-          <th>Title</th>
-          <th>Medium</th>
-          <th>Hammer Price</th>
-          <th>Buyer</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>22</td>
-          <td>Modern Heritage</td>
-          <td>Mixed media on canvas</td>
-          <td>$18,500</td>
-          <td>Collector B (New York)</td>
-        </tr>
-        <tr>
-          <td>23</td>
-          <td>Abstract Forms</td>
-          <td>Acrylic on board</td>
-          <td>$14,200</td>
-          <td>Anonymous</td>
-        </tr>
-        <tr>
-          <td>24</td>
-          <td>Color Variance</td>
-          <td>Oil on canvas</td>
-          <td>$9,800</td>
-          <td>Gallery Modern</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Lot Number</th>
+            <th>Title</th>
+            <th>Medium</th>
+            <th>Hammer Price</th>
+            <th>Buyer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>22</td>
+            <td>Modern Heritage</td>
+            <td>Mixed media on canvas</td>
+            <td>$18,500</td>
+            <td>Collector B (New York)</td>
+          </tr>
+          <tr>
+            <td>23</td>
+            <td>Abstract Forms</td>
+            <td>Acrylic on board</td>
+            <td>$14,200</td>
+            <td>Anonymous</td>
+          </tr>
+          <tr>
+            <td>24</td>
+            <td>Color Variance</td>
+            <td>Oil on canvas</td>
+            <td>$9,800</td>
+            <td>Gallery Modern</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <div class="buyer-note">
       <strong>Note:</strong> Prices reflect the hammer price and exclude buyer's premium and applicable taxes. For detailed purchase info, please contact the auction house.
