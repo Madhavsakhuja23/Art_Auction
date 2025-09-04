@@ -3,14 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Auction results for Legacy Classics artwork by Henri Dubois, including details and sale prices." />
   <title>Legacy Classics - Auction Results</title>
   <style>
+    :root {
+      --bg-light: #f9f5ee;
+      --text-muted: #7a6c5d;
+      --primary-dark: #5a4632;
+      --button-bg: #8b6f47;
+      --button-hover: #755a39;
+    }
+
+    /* General body and container styles */
     body {
       font-family: 'Helvetica Neue', sans-serif;
       background-color: #f5efe6;
       color: #4b3f33;
       margin: 0;
       padding: 24px;
+      line-height: 1.6;
     }
     .container {
       max-width: 940px;
@@ -20,82 +31,115 @@
       border-radius: 14px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
+
+    /* Flexbox for the top section */
     .top-section {
       display: flex;
+      flex-wrap: wrap;
       gap: 2.2rem;
       margin-bottom: 2rem;
       align-items: flex-start;
     }
     .image-container {
-  flex: 0 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  margin-top: 88px; /* approx 10mm downward */
-}
-
-.image-container img {
-  max-width: 320px;
-  max-height: 320px;
-  width: auto;
-  height: auto;
-  border-radius: 0;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.22);
-  display: block;
-  background: #d8cfc3;
-}
-    .content-container {
-      flex: 1 1 0;
+      flex: 1 1 300px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      margin-bottom: 20px;
     }
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.22);
+      background: #d8cfc3;
+    }
+    .content-container {
+      flex: 1 1 500px;
+    }
+
+    /* Styles for summary and details sections */
     .summary {
-      background: #f9f5ee;
+      background: var(--bg-light);
       border-radius: 8px;
       padding: 1rem 1.2rem;
       margin-bottom: 1.2rem;
       font-style: italic;
-      color: #7a6c5d;
+      color: var(--text-muted);
       font-size: 1.05em;
     }
     .details p {
       margin: 0.5rem 0;
       font-size: 1.07rem;
     }
+
+    /* Headings */
     h1 {
       font-family: 'Georgia', serif;
-      color: #5a4632;
+      color: var(--primary-dark);
       margin-top: 0;
       margin-bottom: 1.1rem;
       font-size: 2rem;
     }
     h2 {
       font-family: 'Georgia', serif;
-      color: #5a4632;
+      color: var(--primary-dark);
       margin-top: 2.2rem;
       margin-bottom: 0.9rem;
     }
+
+    /* Table styles */
     .results-table {
       width: 100%;
       border-collapse: collapse;
       margin: 1.1rem 0 1.8rem 0;
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
     }
     .results-table th, .results-table td {
       border: 1px solid #ddd;
       padding: 0.78rem 1rem;
       text-align: left;
+      white-space: nowrap;
     }
     .results-table th {
       background-color: #8b6f47;
       color: white;
       font-size: 1rem;
     }
+    .results-table tbody tr:hover {
+      background-color: #f1ebe3;
+    }
+
     .buyer-note {
-      background: #f9f5ee;
-      color: #7a6c5d;
+      background: var(--bg-light);
+      color: var(--text-muted);
       padding: 0.8rem 1.2rem;
       border-radius: 8px;
       font-size: 0.99em;
       margin-bottom: 2rem;
     }
+
+    /* Back button */
+    .back-button {
+      display: inline-block;
+      background: var(--button-bg);
+      color: white;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .back-button:hover {
+      background: var(--button-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Mobile-specific adjustments */
     @media (max-width: 850px) {
       .top-section {
         flex-direction: column;
@@ -104,12 +148,43 @@
       .image-container {
         width: 100%;
         justify-content: center;
-        margin-top: 0; /* remove extra margin on small screens */
         margin-bottom: 1rem;
       }
-      .image-container img {
-        max-width: 100%;
-        height: auto;
+    }
+
+    /* Extra small screen: convert table to stacked format */
+    @media (max-width: 500px) {
+      .results-table thead {
+        display: none;
+      }
+      .results-table, 
+      .results-table tbody, 
+      .results-table tr, 
+      .results-table td {
+        display: block;
+        width: 100%;
+      }
+      .results-table tr {
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 0.5rem;
+      }
+      .results-table td {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem;
+        border: none;
+        border-bottom: 1px solid #eee;
+      }
+      .results-table td:last-child {
+        border-bottom: none;
+      }
+      .results-table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 0.5rem;
+        color: var(--primary-dark);
       }
     }
   </style>
@@ -118,7 +193,7 @@
   <div class="container">
     <div class="top-section">
       <div class="image-container">
-        <img src="images/past1.jpg" alt="Legacy Classics Artwork" />
+        <img src="images/past1.jpg" alt="Oil painting 'Legacy Classics' by Henri Dubois (1923)" />
       </div>
       <div class="content-container">
         <h1>Legacy Classics</h1>
@@ -136,8 +211,12 @@
         </div>
       </div>
     </div>
+
     <h2>Auction Results</h2>
     <table class="results-table">
+      <caption style="text-align:left; font-style:italic; color:var(--text-muted); padding:0.5rem 0;">
+        Auction results for Legacy Classics and related works.
+      </caption>
       <thead>
         <tr>
           <th>Lot Number</th>
@@ -149,31 +228,57 @@
       </thead>
       <tbody>
         <tr>
-          <td>14</td>
-          <td>Legacy Classics</td>
-          <td>Oil on canvas</td>
-          <td>$22,500</td>
-          <td>Collector A (Paris)</td>
+          <td data-label="Lot Number">14</td>
+          <td data-label="Title">Legacy Classics</td>
+          <td data-label="Medium">Oil on canvas</td>
+          <td data-label="Hammer Price">$22,500</td>
+          <td data-label="Buyer">Collector A (Paris)</td>
         </tr>
         <tr>
-          <td>15</td>
-          <td>Sunlit Fields</td>
-          <td>Oil on canvas</td>
-          <td>$18,200</td>
-          <td>Anonymous</td>
+          <td data-label="Lot Number">15</td>
+          <td data-label="Title">Sunlit Fields</td>
+          <td data-label="Medium">Oil on canvas</td>
+          <td data-label="Hammer Price">$18,200</td>
+          <td data-label="Buyer">Anonymous</td>
         </tr>
         <tr>
-          <td>16</td>
-          <td>The Evening Calm</td>
-          <td>Oil on panel</td>
-          <td>$10,900</td>
-          <td>Gallery Lumière</td>
+          <td data-label="Lot Number">16</td>
+          <td data-label="Title">The Evening Calm</td>
+          <td data-label="Medium">Oil on panel</td>
+          <td data-label="Hammer Price">$10,900</td>
+          <td data-label="Buyer">Gallery Lumière</td>
         </tr>
       </tbody>
     </table>
+
     <div class="buyer-note">
       <strong>Note:</strong> Final hammer price excludes buyer’s premium and taxes. Contact auction house for detailed invoice.
     </div>
+
+       <h2>Provenance</h2>
+    <ul>
+      <li>Private Collection, Lyon (1925–1950)</li>
+      <li>Galerie des Beaux-Arts, Paris (1950–1978)</li>
+      <li>Estate of Henri Dubois (1978–2020)</li>
+    </ul>
+
+    <h2>Exhibition History</h2>
+    <ul>
+      <li>French Impressionists, Musée d'Orsay, Paris, 1930</li>
+      <li>Masters of Modern Art, Tate Gallery, London, 1954</li>
+      <li>European Landscapes, The Met, New York, 1987</li>
+    </ul>
+
+    <h2>Literature</h2>
+    <ul>
+      <li>J. Moreau, <em>Impressionism in France</em>, 1948, p. 142</li>
+      <li>L. Bernard, <em>Art of the Early 20th Century</em>, 1965, p. 220</li>
+      <li>P. Girard, <em>Legacy of Dubois</em>, 1999, p. 87</li>
+    </ul>
+
+    <!-- Back button -->
+    <a href="auctions.html" class="back-button">← Back to Auctions</a>
+
   </div>
 </body>
 </html>
