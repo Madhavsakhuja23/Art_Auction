@@ -1,134 +1,185 @@
-/* Reset and Base */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body {
-  font-family: 'Manrope', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5efe6;
-  color: #4b3f33;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  overflow: hidden;
-}
+    body {
+      font-family: 'Manrope', sans-serif;
+      background-color: #f5efe6;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-/* Page load animation */
-.fade-in {
-  animation: fadeIn 1s ease-in-out forwards;
-  opacity: 0;
-}
-@keyframes fadeIn {
-  0% { transform: translateY(50px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
+    /* Main Container */
+    .login-container {
+      display: flex;
+      width: 1000px;
+      max-width: 95%;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
 
-/* Login Container */
-#outer {
-  position: relative;
-  background-color: #d2c3b3;
-  padding: 40px;
-  border-radius: 16px;
-  width: 400px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+    .close-btn {
+      position: absolute;
+      top: 22px;
+      right: 20px;
+      font-size: 32px;
+      color: #5a4632; /* brown */
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
 
-#outer:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-}
-#cross {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 24px;
-  cursor: pointer;
-  color: #333;
-  font-weight: bold;
-}
-#cross a {
-  text-decoration: none;
-  color: #4b3f33;  /* brown color */
-}
-#cross a:hover {
-  color: #3a322b;  /* darker brown on hover */
-}
-/* Heading */
-h2 {
-  text-align: center;
-  color: #3a322b;
-  font-weight: 700;
-  font-size: 1.8rem;
-  margin-bottom: 25px;
-}
+    .close-btn:hover {
+      color: #3b2a1d; /* darker brown on hover */
+    }
 
-/* Form Styling */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
+    .login-container {
+      position: relative; /* to position cross inside */
+    }
 
-input[type="email"],
-input[type="password"] {
-  padding: 14px;
-  border: 1.5px solid #d6c4b2;
-  border-radius: 8px;
-  width: 100%;
-  font-size: 1rem;
-  background-color: #fdfaf6;
-  color: #4b3f33;
-  outline: none;
-  transition: 0.3s;
-}
+    /* Left: Form Section */
+    .form-section {
+      flex: 1;
+      padding: 60px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
-input[type="email"]:focus,
-input[type="password"]:focus {
-  border-color: #4b3f33;
-  background-color: #fff;
-}
+    .form-section h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #2c241d;
+    }
 
-/* Submit Button */
-input[type="submit"] {
-  background-color: #4b3f33;
-  color: white;
-  border: none;
-  padding: 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s;
-}
+    .form-section p.subtitle {
+      font-size: 1rem;
+      color: #5f5246;
+      margin-bottom: 30px;
+    }
 
-input[type="submit"]:hover {
-  background-color: #3a322b;
-}
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
 
-/* Sign-in link */
-.signin-link {
-  text-align: center;
-  margin-top: 10px;
-  font-size: 0.95rem;
-}
+    input[type="email"], input[type="password"] {
+      padding: 14px;
+      border: 1.5px solid #ddd;
+      border-radius: 30px;
+      font-size: 1rem;
+      outline: none;
+      transition: 0.3s;
+    }
 
-.signin-link a {
-  color:#12100e;
-  font-weight: 500;
-}
-#chk{
-  display: none;
+    input[type="email"]:focus, input[type="password"]:focus {
+      border-color: #4b3f33;
+    }
 
-}
-.forgot-link {
-  text-align: left;
-  margin-top: 10px;
-  font-size: 0.95rem;
-}
-.forgot-link a {
-  color:#12100e;
-  font-weight: 500;
-}
+    .forgot-link {
+      text-align: right;
+      font-size: 0.9rem;
+      margin-top: -10px;
+    }
+
+    .forgot-link a {
+      color: #4b3f33;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .forgot-link a:hover {
+      text-decoration: underline;
+    }
+
+    input[type="submit"] {
+      background: #4b3f33;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background: #3a2f28;
+    }
+
+    /* Divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 20px 0;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .divider::before, .divider::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid #ddd;
+    }
+    .divider:not(:empty)::before {
+      margin-right: .75em;
+    }
+    .divider:not(:empty)::after {
+      margin-left: .75em;
+    }
+
+    /* Sign up link */
+    .signup-link {
+      text-align: center;
+      font-size: 0.95rem;
+    }
+    .signup-link a {
+      color: #2f3a2c;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+
+    /* Right: Illustration Section */
+    .banner {
+      flex: 1;
+      background-color: #f8f1e9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+    .banner-content {
+      text-align: center;
+    }
+    .banner-content img {
+      max-width: 400px;
+      margin-bottom: 20px;
+    }
+    .banner-content h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2c241d;
+    }
+
+    /* Responsive */
+    @media (max-width: 850px) {
+      .login-container {
+        flex-direction: column;
+      }
+      .banner {
+        order: -1;
+      }
+    }
