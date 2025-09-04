@@ -740,7 +740,6 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Services Section (Updated) */
 .services-section {
-  background-color: #fdfaf3; /* light nude from your footer */
   color: #4b3f33; /* deep taupe from your body text */
   padding: 80px 5%;
   text-align: center;
@@ -1140,4 +1139,5 @@ h1, h2, h3, h4, h5, h6 {
   }
 
 }
+
 
