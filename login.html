@@ -3,27 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login</title>
-  <link rel="stylesheet" href="login.css"/>
+  <title>Aurtistiq Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="login.css" />
 </head>
 <body>
-  <div id="outer" class="fade-in">
-    <p id="cross"><a href="index.html">&cross;</a></p>
-    <h2>Login</h2>
-    <div id="chk"></div>
-    <form onsubmit="return frm_chk(event)" method="post">
-      <input type="email" name="email" id="email" placeholder="Email" required />
-      <input type="password" name="pwd" id="pwd" placeholder="Password" required />
-      <input type="submit" value="Login"/> 
-      <span class="forgot-link"><a href="forgot.html">Forgot your password?</a></span>
-      <p class="signin-link">Don't have an account? <a href="signup.html">Sign up</a></p>
-    </form>
+  <div class="login-container">
+    
+    <!-- Cross icon -->
+    <a href="index.html" class="close-btn">&times;</a>
+
+    <!-- Left: Login Form -->
+    <div class="form-section">
+      <h1>Welcome back!</h1>
+      <p class="subtitle">Log in to continue exploring and bidding on unique art with <strong>Aurtistiq</strong>.</p>
+      
+      <form onsubmit="return frm_chk(event)">
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="pwd" placeholder="Password" required />
+        <div class="forgot-link"><a href="forgot.html">Forgot Password?</a></div>
+        <input type="submit" value="Login" />
+      </form>
+
+      <br><br>
+      <p class="signup-link">Not a member? <a href="signup.html">Register now</a></p>
+    </div>
+
+    <!-- Right: Banner -->
+    <div class="banner">
+      <div class="banner-content">
+        <img src="images/login.png" alt="Art Illustration" />
+        <h2>"Where creativity finds its true collector."</h2>
+      </div>
+    </div>
   </div>
+
   <script>
     let se = localStorage.getItem("email");
     let sp = localStorage.getItem("password");
     let sfn = localStorage.getItem("Firstname");
+
     function frm_chk(event) {
       event.preventDefault(); 
       let le = document.getElementById("email").value;
@@ -32,15 +51,11 @@
         sessionStorage.setItem("Firstname", sfn);
         window.location.href="index.html";
         return true;
-      }
-      else{
-         document.getElementById("chk").style.display = "block";
-        document.getElementById("chk").innerHTML="Enter the valid details";
-        document.getElementById("chk").style.color = "#333"; 
+      } else {
+        alert("Enter valid details");
         return false;
       }
     }
   </script>
 </body>
 </html>
-
