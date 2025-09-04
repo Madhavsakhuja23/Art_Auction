@@ -48,8 +48,8 @@ h1, h2, h3, h4, h5, h6 {
   color: #3b2d22;
   flex: 1; /* take left side */
 }
-#hamburger{
-  display:none;
+#hamburger {
+    display: none;
 }
 .nav-links {
   list-style: none;
