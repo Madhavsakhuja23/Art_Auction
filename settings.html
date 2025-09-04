@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,88 +6,132 @@
   <link rel="stylesheet" href="settings.css" />
 </head>
 <body>
-  <div class="settings-container">
-    <h1>Settings</h1>
-    <form id="settingsForm">
-      <label for="name">Name</label>
-      <input type="text" id="name" placeholder="Enter your name" required />
+  <div class="settings-wrapper">
+    
+    <!-- Left Section: Art Image with Text -->
+    <div class="left-section">
+      <img src="images/setting.jpg" alt="Art Auction">
+      <div class="overlay-text">
+        <h2>Manage Your Aurtistiq Profile</h2>
+        <p>Update your details, location, and security settings to keep your art journey safe and personalized.</p>
+      </div>
+    </div>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" placeholder="Enter your email" required />
-      <input type="password" id="pwdc" placeholder="Current Password" required />
-      <div id="pwd-error" style="display: none;"></div>
-      <input type="password" id="pwd" placeholder="New Password" required />
-      <div id="pwdchk" style="display: none;"></div>
-      <input type="password" id="cpwd" placeholder="Confirm Password" required />
-      <button type="submit">Save & Go to Home</button>
-    </form>
+    <!-- Right Section: Form -->
+    <div class="right-section">
+      <h1>Settings</h1>
+      <br>
+<form id="settingsForm">
+  <label for="name">Name</label>
+  <input type="text" id="name" placeholder="Enter your name" />
+  <span id="nameError" style="color:#4b3f33; font-size:0.9em;"></span>
+
+  <label for="email">Email</label>
+  <input type="email" id="email" placeholder="Enter your email" />
+  <span id="emailError" style="color:#4b3f33; font-size:0.9em;"></span>
+
+  <label for="phone">Phone Number</label>
+  <input type="tel" id="phone" placeholder="Enter your phone number" />
+  <span id="phoneError" style="color:#4b3f33; font-size:0.9em;"></span>
+
+  <label for="location">Location</label>
+  <input type="text" id="location" placeholder="Enter your location" />
+  <span id="locationError" style="color:#4b3f33; font-size:0.9em;"></span>
+
+  <label for="zipcode">Zip Code</label>
+  <input type="text" id="zipcode" placeholder="Enter your zip code" />
+  <span id="zipcodeError" style="color:#4b3f33; font-size:0.9em;"></span>
+
+  <label for="pwdc">Current Password</label>
+  <input type="password" id="pwdc" placeholder="Current Password" />
+  <span id="pwdcError" style="color:#4b3f33; font-size:0.9em;"></span>
+
+  <label for="password">New Password</label>
+  <input type="password" id="password" placeholder="Enter your New password" />
+  <span id="passwordError" style="color:#4b3f33; font-size:0.9em;"></span>
+
+  <button type="submit">Save & Go to Home</button>
+</form>
+
+<p id="formMessage"></p>
+
+    </div>
   </div>
-
-  <script>
-    function pwd_check() {
-      const pwd = document.getElementById("pwd").value;
-      const cpwd = document.getElementById("cpwd").value;
-      const feedback = document.getElementById("pwdchk");
-
-      feedback.style.display = "block";
-      // feedback.style.padding = "8px";
-      // feedback.style.borderRadius = "6px";
-      // feedback.style.fontSize = "14px";
-      feedback.style.backgroundColor = "transparent";
-
-
-      if (pwd.length < 10) {
-        feedback.innerHTML = "Password must be at least 10 characters long.";
-        feedback.style.color = "#ffd4d4";
-        return false;
-      }
-      const hasUpperCase = /[A-Z]/.test(pwd);
-      const hasNumber = /\d/.test(pwd);
-
-      if (!hasUpperCase || !hasNumber) {
-        feedback.innerHTML = " Password must include a uppercase and a number.";
-        feedback.style.color = " #ffd4d4";
-        return false;
-      }
-
-
-      if (pwd !== cpwd) {
-        feedback.innerHTML = "Passwords do not match.";
-        feedback.style.color = "#ffd4d4";
-        return false;
-      }
-
-      feedback.innerHTML = "Password is strong and matches.";
-      feedback.style.color = "green";
-      return true;
-
-
-    }
-    // Load existing data
-    window.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("name").value = sessionStorage.getItem("Firstname") || "";
-      document.getElementById("email").value = localStorage.getItem("email") || "";
-    });
-
-    // Save updated settings
-    document.getElementById("settingsForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value;
-      const pwdcls=localStorage.getItem("password");
-      if(pwdcls!=document.getElementById("pwdc").value){
-        document.getElementById("pwd-error").innerText="Enter The correct password";
-        document.getElementById("pwd-error").style.display="inline";
-        return false;
-      }
-      if(pwd_check()){
-      sessionStorage.setItem("Firstname", name);
-      localStorage.setItem("email", email);
-      localStorage.setItem("password", document.getElementById("pwd").value);
-      // Redirect to home
-      window.location.href = "index.html";
-      }
-    });
-  </script>
 </body>
+<script>
+document.getElementById("settingsForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  let isValid = true;
+
+  // Get values
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const location = document.getElementById("location").value.trim();
+  const zipcode = document.getElementById("zipcode").value.trim();
+  const pwdc = document.getElementById("pwdc").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  // Reset error messages
+  const fields = ["name", "email", "phone", "location", "zipcode", "pwdc", "password"];
+  fields.forEach(f => document.getElementById(f + "Error").innerHTML = "");
+
+  // Validate name
+  if (name.length < 3) {
+    document.getElementById("nameError").innerHTML = "Name must be at least 3 characters.";
+    isValid = false;
+  }
+
+  // Validate email
+  const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+  if (!email.match(emailPattern)) {
+    document.getElementById("emailError").innerHTML = "Invalid email address.";
+    isValid = false;
+  }
+
+  // Validate phone (10 digits)
+  const phonePattern = /^[0-9]{10}$/;
+  if (!phone.match(phonePattern)) {
+    document.getElementById("phoneError").innerHTML = "Phone must be 10 digits.";
+    isValid = false;
+  }
+
+  // Validate location
+  if (location.length < 2) {
+    document.getElementById("locationError").innerHTML = "Enter a valid location.";
+    isValid = false;
+  }
+
+  // Validate zipcode (6 digits)
+  const zipPattern = /^[0-9]{6}$/;
+  if (!zipcode.match(zipPattern)) {
+    document.getElementById("zipcodeError").innerHTML = "Zip must be 6 digits.";
+    isValid = false;
+  }
+
+  // Validate current password
+  if (pwdc.length < 6) {
+    document.getElementById("pwdcError").innerHTML = "Enter your current password.";
+    isValid = false;
+  }
+
+  // Validate new password
+  if (password.length < 6) {
+    document.getElementById("passwordError").innerHTML = "Password must be at least 6 characters.";
+    isValid = false;
+  }
+
+  // Final result
+  if (isValid) {
+    document.getElementById("formMessage").innerHTML = "<span style='color:green;'>Settings saved successfully!</span>";
+    setTimeout(() => {
+      window.location.href = "index.html"; // redirect
+    }, 1500);
+  } else {
+    document.getElementById("formMessage").innerHTML = "<span style='color:red;'>Please fix errors above.</span>";
+  }
+});
+
+</script>
 </html>
