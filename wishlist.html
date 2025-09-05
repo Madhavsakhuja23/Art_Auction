@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wishlist - Aurtistiq</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <link rel="stylesheet" href="wishlist.css" />
+</head>
+<body>
+  <!-- Navbar - Exact same as collect -->
+  <nav class="navbar">
+    <div class="logo">Aurtistiq</div>
+
+    <div class="nav-search">
+      <input type="text" id="navSearch" placeholder="Search artworks…">
+      <span class="search-icon"></span>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="collect.html">Collect</a></li>
+      <li><a href="auctions.html">Auctions</a></li>
+      <li><a href="signup.html">Sign In</a></li>
+      <li>
+        <a href="wishlist.html">
+         ❤ <span id="wishlistCount">0</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Wishlist Header - Same style as collect-header -->
+  <section class="wishlist-header">
+    <h2>My Wishlist</h2>
+    
+    <a href="collect.html" class="back-btn">← Back to Collect</a>
+  </section>
+  
+<div class="wishlist-p">
+  <p>Your favorite artworks collection</p>
+</div>
+
+  
+
+  <!-- Wishlist Grid - Same masonry layout as collect -->
+  <section class="wishlist-grid-section">
+    <div class="wishlist-masonry" id="wishlistContainer">
+      <!-- Items will be added via JS -->
+    </div>
+  </section>
+
+  <!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-columns">
+      <div class="footer-column">
+        <h4>About</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Discover</h4>
+        <ul>
+          <li><a href="#">Auctions</a></li>
+          <li><a href="#">Artists</a></li>
+          <li><a href="#">Galleries</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Buying on Aurtistiq</a></li>
+          <li><a href="#">Selling on Aurtistiq</a></li>
+        </ul>
+      </div>
+      <div class="footer-column footer-newsletter">
+  <h4>Stay in Touch</h4>
+  <form id="footer-newsletter" class="footerForm">
+    <input id="email" type="email" placeholder="Your email address" required />
+    <button type="submit">Subscribe</button>
+  </form>
+</div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Aurtistiq. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  <script>
+    // Get DOM elements
+    const wishlistContainer = document.getElementById('wishlistContainer');
+    const wishlistCountEl = document.getElementById('wishlistCount');
+
+    // Function to get wishlist from localStorage
+    function getWishlist() {
+      try {
+        const wishlist = localStorage.getItem('wishlist');
+        return wishlist ? JSON.parse(wishlist) : [];
+      } catch (e) {
+        console.error('Error reading wishlist from localStorage:', e);
+        return [];
+      }
+    }
+
+    // Function to save wishlist to localStorage
+    function saveWishlist(wishlist) {
+      try {
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        console.log('Wishlist saved:', wishlist.length, 'items');
+      } catch (e) {
+        console.error('Error saving wishlist to localStorage:', e);
+      }
+    }
+
+    // Function to update wishlist count
+    function updateWishlistCount() {
+      const wishlist = getWishlist();
+      const count = wishlist.length;
+      wishlistCountEl.textContent = count;
+      console.log('Wishlist count updated:', count);
+    }
+
+    // Function to render wishlist items
+    function renderWishlist() {
+      console.log('Rendering wishlist...');
+      const wishlist = getWishlist();
+      
+      // Clear container
+      wishlistContainer.innerHTML = '';
+      
+      // Update count
+      updateWishlistCount();
+
+      console.log('Wishlist items found:', wishlist.length);
+
+      // Show empty state if no items
+      if (wishlist.length === 0) {
+        wishlistContainer.style.columnCount = '1';
+        wishlistContainer.innerHTML = `
+          <div class="empty-wishlist">
+            <i class="fas fa-heart"></i>
+            <p>Your wishlist is empty</p>
+            <p>Like some artworks from the Collect page to see them here!</p>
+            <p style="font-size: 0.9rem; color: #999; margin-top: 1rem;">
+              <strong>How to add items:</strong><br>
+              1. Go to Collect page<br>
+              2. Double-click on any artwork<br>
+              3. Or click the heart icon
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      // Reset column count for masonry
+      wishlistContainer.style.columnCount = '';
+
+      // Render each wishlist item
+      wishlist.forEach((item, index) => {
+        console.log('Rendering item:', item);
+        
+        const card = document.createElement('div');
+        card.classList.add('wishlist-card');
+
+        // Handle different data structures
+        const imgSrc = item.imgSrc || item.img || item.image || '';
+        const artistName = item.artistName || item.artist || 'Unknown Artist';
+        const artTitle = item.artTitle || item.title || 'Untitled';
+        const artGallery = item.artGallery || item.gallery || '';
+        const artPrice = item.artPrice || item.price || '';
+
+        card.innerHTML = `
+          <div class="wishlist-image-wrapper">
+            <img src="${imgSrc}" alt="${artTitle}" loading="lazy" 
+                 onerror="this.src='https://via.placeholder.com/280x200/f0f0f0/999999?text=Image+Not+Found'">
+            <button class="remove-btn" onclick="removeFromWishlist(${index})" title="Remove from wishlist">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="wishlist-card-info">
+            <p class="artist-name">${artistName}</p>
+            <p class="art-title">${artTitle}</p>
+            ${artGallery ? `<p class="art-gallery">${artGallery}</p>` : ''}
+            ${artPrice ? `<p class="art-price">${artPrice}</p>` : ''}
+          </div>
+        `;
+
+        wishlistContainer.appendChild(card);
+      });
+    }
+
+    // Function to remove item from wishlist
+    function removeFromWishlist(index) {
+      console.log('Removing item at index:', index);
+      const wishlist = getWishlist();
+      const removedItem = wishlist[index];
+      
+      if (!removedItem) {
+        console.error('Item not found at index:', index);
+        return;
+      }
+      
+      // Remove item from array
+      wishlist.splice(index, 1);
+      
+      // Save updated wishlist
+      saveWishlist(wishlist);
+      
+      // Re-render wishlist
+      renderWishlist();
+      
+      // Show removal message
+      const title = removedItem.artTitle || removedItem.title || 'Artwork';
+      showRemoveMessage(title);
+      
+      // Trigger storage event manually for same-window updates
+      window.dispatchEvent(new StorageEvent('storage', {
+        key: 'wishlist',
+        newValue: JSON.stringify(wishlist),
+        storageArea: localStorage
+      }));
+    }
+
+    // Function to show removal message
+    function showRemoveMessage(title) {
+      const message = document.createElement('div');
+      message.className = 'remove-message';
+      message.innerHTML = `
+        <i class="fas fa-check-circle" style="margin-right: 8px;"></i>
+        Removed "${title}" from wishlist
+      `;
+      
+      document.body.appendChild(message);
+      
+      // Auto remove message after 3 seconds
+      setTimeout(() => {
+        if (message.parentNode) {
+          message.remove();
+        }
+      }, 3000);
+    }
+
+// function to show add message.
+
+function showAddMessage(title) {
+  const message = document.createElement('div');
+  message.className = 'add-message';
+  message.innerHTML = `
+    <i class="fas fa-heart" style="margin-right: 8px;"></i>
+    Added "${title}" to wishlist
+  `;
+  
+  document.body.appendChild(message);
+  
+  // Auto remove message after 3 seconds
+  setTimeout(() => {
+    if (message.parentNode) {
+      message.remove();
+    }
+  }, 3000);
+}
+
+    // Function to add test items (for testing only)
+    function addTestItems() {
+      const testItems = [
+        {
+          artistName: "Vincent van Gogh",
+          artTitle: "Starry Night",
+          artGallery: "MoMA",
+          artPrice: "$100M",
+          imgSrc: "https://via.placeholder.com/300x400/4285f4/ffffff?text=Starry+Night"
+        },
+        {
+          artistName: "Pablo Picasso", 
+          artTitle: "Guernica",
+          artGallery: "Reina Sofia",
+          artPrice: "$200M",
+          imgSrc: "https://via.placeholder.com/300x350/ff9800/ffffff?text=Guernica"
+        }
+      ];
+      
+      saveWishlist(testItems);
+      renderWishlist();
+      console.log('Test items added');
+    }
+
+    // Listen for localStorage changes from other pages
+    window.addEventListener('storage', (e) => {
+      console.log('Storage event received:', e.key);
+      if (e.key === 'wishlist') {
+        renderWishlist();
+      }
+    });
+
+    // Listen for page focus (when user comes back to tab)
+    window.addEventListener('focus', () => {
+      console.log('Page focused, refreshing wishlist');
+      renderWishlist();
+    });
+
+    // Initial render when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('DOM loaded, initializing wishlist');
+      renderWishlist();
+    });
+
+    // Also try on window load
+    window.addEventListener('load', () => {
+      console.log('Window loaded, rendering wishlist');
+      setTimeout(renderWishlist, 100); // Small delay to ensure everything is ready
+    });
+
+    // Re-render when page becomes visible (tab switching)
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        console.log('Page visible, refreshing wishlist');
+        renderWishlist();
+      }
+    });
+
+    // Search functionality
+    document.getElementById('navSearch').addEventListener('input', function(e) {
+      const searchTerm = e.target.value.toLowerCase();
+      const cards = document.querySelectorAll('.wishlist-card');
+      
+      cards.forEach(card => {
+        const artistName = card.querySelector('.artist-name')?.textContent.toLowerCase() || '';
+        const artTitle = card.querySelector('.art-title')?.textContent.toLowerCase() || '';
+        
+        if (searchTerm === '' || artistName.includes(searchTerm) || artTitle.includes(searchTerm)) {
+          card.style.display = 'inline-block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+
+    // Debug function - check localStorage directly
+    function checkWishlistData() {
+      console.log('=== WISHLIST DEBUG INFO ===');
+      console.log('localStorage wishlist:', localStorage.getItem('wishlist'));
+      console.log('Parsed wishlist:', getWishlist());
+      console.log('Wishlist count:', getWishlist().length);
+      console.log('==========================');
+    }
+
+    // Make functions global for testing
+    window.addTestItems = addTestItems;
+    window.checkWishlistData = checkWishlistData;
+    window.removeFromWishlist = removeFromWishlist;
+
+    // Auto-check on load for debugging
+    setTimeout(checkWishlistData, 1000);
+
+    
+// Footer newsletter email only
+function sendEmail(e){
+    e.preventDefault();
+    const para= {
+        Name: document.getElementById("username").innerText,
+        email: document.getElementById("email").value,
+    }
+    const serviceID="service_gc6z3ld";
+    const templateID="template_6p9239p";
+    emailjs.send(serviceID,templateID,para).then(res=>{
+        document.getElementById("subs").value="Subscribed";
+    })
+    .catch(err=>console.log(err));
+}
+document.getElementById("footer-newsletter").addEventListener("submit", sendEmail);
+
+  </script>
+</body>
+</html>
