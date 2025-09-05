@@ -26,6 +26,11 @@
       <li><a href="auctions.html">Auctions</a></li>
       <li id="Signin"><a href="signup.html">Sign In</a></li>
       <li id="username"></li>
+      <li>
+        <a href="wishlist.html">
+         ❤ <span id="wishlistCount">0</span>
+        </a>
+      </li>
     </ul>
     </div>
     <div class="dropdown-content" id="dropdown">
@@ -822,102 +827,323 @@ document.getElementById("logout").addEventListener("click", function (e) {
 
 
   
-//nav bar search funtionaliy
+// Global variables
+let wishlistItems = [];
+let wishlistCount = 0;
+const wishlistCounter = document.getElementById("wishlistCount");
 
-const navSearch = document.getElementById('navSearch');
-const artCards = document.querySelectorAll('.artsy-card');
-
-function runSearch(keyword) {
-  keyword = keyword.toLowerCase();
-  let firstMatch = null;
-
-  artCards.forEach(card => {
-    const artistName = card.querySelector('.artist-name').textContent.toLowerCase();
-    const artTitle = card.querySelector('.art-title').textContent.toLowerCase();
-
-    if (keyword && (artistName.includes(keyword) || artTitle.includes(keyword))) {
-      card.classList.add("highlight");
-      card.classList.remove("dim");
-      if (!firstMatch) firstMatch = card;
-    } else if (keyword) {
-      card.classList.add("dim");
-      card.classList.remove("highlight");
-    } else {
-      card.classList.remove("highlight", "dim");
-    }
-  });
-
-  if (firstMatch) firstMatch.scrollIntoView({ behavior: "smooth", block: "center" });
+// Function to get wishlist from localStorage
+function getWishlistFromStorage() {
+  try {
+    const wishlist = localStorage.getItem('wishlist');
+    return wishlist ? JSON.parse(wishlist) : [];
+  } catch (e) {
+    console.error('Error reading wishlist from localStorage:', e);
+    return [];
+  }
 }
 
-// Event listener for navbar search
-navSearch.addEventListener('input', (e) => runSearch(e.target.value));
+// Function to save wishlist to localStorage
+function saveWishlistToStorage(wishlist) {
+  try {
+    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    console.log('Wishlist saved to localStorage:', wishlist.length, 'items');
+    
+    // Dispatch storage event for other pages
+    window.dispatchEvent(new StorageEvent('storage', {
+      key: 'wishlist',
+      newValue: JSON.stringify(wishlist),
+      storageArea: localStorage
+    }));
+  } catch (e) {
+    console.error('Error saving wishlist to localStorage:', e);
+  }
+}
 
+// Update wishlist count display
+function updateWishlistCount() {
+  wishlistItems = getWishlistFromStorage(); // Sync with localStorage
+  wishlistCount = wishlistItems.length;
+  wishlistCounter.textContent = wishlistCount;
+  console.log('Wishlist count updated:', wishlistCount);
+}
 
-// Listen for typing in navbar search
-navSearch.addEventListener('input', (e) => {
-  runSearch(e.target.value);
-});
+// Add item to wishlist
+function addToWishlist(artwork) {
+  // Get current wishlist from localStorage
+  wishlistItems = getWishlistFromStorage();
+  
+  // Check if item already exists (compare by image src)
+  const exists = wishlistItems.some(item => 
+    (item.imgSrc || item.img) === artwork.img
+  );
+  
+  if (!exists) {
+    // Create consistent data structure for wishlist.html
+    const wishlistItem = {
+      artistName: artwork.artist,
+      artTitle: artwork.title,
+      artGallery: artwork.gallery,
+      artPrice: artwork.price,
+      imgSrc: artwork.img, // Use imgSrc to match wishlist.html expectations
+      img: artwork.img     // Keep both for compatibility
+    };
+    
+    wishlistItems.push(wishlistItem);
+    
+    // Save to localStorage
+    saveWishlistToStorage(wishlistItems);
+    
+    // Update count
+    updateWishlistCount();
+    
+    console.log("Added to wishlist:", artwork.title);
+    showAddMessage(artwork.title);
+  }
+}
 
-
-const openBtn = document.getElementById('openSidebar');
-const closeBtn = document.getElementById('closeSidebar');
-const sidebar = document.getElementById('filterSidebar');
-const overlay = document.getElementById('overlay');
-
-const searchInput = document.querySelector('.filter-search input');
-
-searchInput.addEventListener('input', (e) => {
-  const keyword = e.target.value.toLowerCase();
-  console.log("Searching for:", keyword);
-  // Here, you’d filter your artwork grid based on title, artist, etc.
-});
-
-
-openBtn.addEventListener('click', () => {
-  sidebar.classList.add('open');
-  overlay.classList.add('show');
-});
-
-closeBtn.addEventListener('click', () => {
-  sidebar.classList.remove('open');
-  overlay.classList.remove('show');
-});
-
-overlay.addEventListener('click', () => {
-  sidebar.classList.remove('open');
-  overlay.classList.remove('show');
-});
-
-// heart pop up when double tapped
-
-document.querySelectorAll('.artsy-card').forEach(card => {
-  const wrapper = card.querySelector('.image-wrapper');
-  const heart = card.querySelector('.double-tap-heart');
-  const likeIcon = card.querySelector('.like-icon i');
-
-  // Double-click on image → show big heart + activate small heart
-  wrapper.addEventListener('dblclick', () => {
-    heart.classList.add('animate');
-    likeIcon.classList.add('fas', 'liked');
-    likeIcon.classList.remove('far');
-
-    heart.addEventListener('animationend', () => {
-      heart.classList.remove('animate');
-    }, { once: true });
-  });
-
-  // Click small heart → toggle
-  likeIcon.parentElement.addEventListener('click', () => {
-    if (likeIcon.classList.contains('fas')) {
-      likeIcon.classList.remove('fas', 'liked');
-      likeIcon.classList.add('far');
-    } else {
-      likeIcon.classList.remove('far');
-      likeIcon.classList.add('fas', 'liked');
+// Remove item from wishlist
+function removeFromWishlist(artworkImg) {
+  wishlistItems = getWishlistFromStorage();
+  
+  // Remove item from array
+  wishlistItems = wishlistItems.filter(item => 
+    (item.imgSrc || item.img) !== artworkImg
+  );
+  
+  // Save to localStorage
+  saveWishlistToStorage(wishlistItems);
+  
+  // Update count
+  updateWishlistCount();
+  
+  // Update the heart icon in collect page
+  const artCards = document.querySelectorAll('.artsy-card');
+  artCards.forEach(card => {
+    const img = card.querySelector('img');
+    if (img && img.src === artworkImg) {
+      const likeIcon = card.querySelector('.like-icon');
+      if (likeIcon) {
+        likeIcon.classList.remove('liked');
+        likeIcon.querySelector('i').classList.remove('fas');
+        likeIcon.querySelector('i').classList.add('far');
+      }
     }
   });
+  
+  console.log("Removed from wishlist:", artworkImg);
+}
+
+// Show add message
+function showAddMessage(title) {
+  const message = document.createElement('div');
+  message.className = 'add-message';
+  message.style.cssText = `
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  background: #694e39;   /* warm brown */
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  z-index: 9999;
+  animation: slideIn 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  `;
+  
+  message.innerHTML = `
+    <i class="fas fa-heart" style="margin-right: 8px;"></i>
+    Added "${title}" to wishlist
+  `;
+  
+  document.body.appendChild(message);
+  
+  // Auto remove message after 3 seconds
+  setTimeout(() => {
+    if (message.parentNode) {
+      message.remove();
+    }
+  }, 3000);
+}
+
+// Initialize the wishlist functionality when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // Load existing wishlist and update count
+  updateWishlistCount();
+  
+  // Add event listeners to all existing art cards
+  document.querySelectorAll('.artsy-card').forEach(card => {
+    const wrapper = card.querySelector('.image-wrapper');
+    const heart = card.querySelector('.double-tap-heart');
+    const likeIcon = card.querySelector('.like-icon');
+    const heartIcon = likeIcon.querySelector('i');
+    const img = card.querySelector('img');
+    
+    // Check if this item is already in wishlist and update UI
+    const currentWishlist = getWishlistFromStorage();
+    const isLiked = currentWishlist.some(item => 
+      (item.imgSrc || item.img) === img.src
+    );
+    
+    if (isLiked) {
+      likeIcon.classList.add('liked');
+      heartIcon.classList.remove('far');
+      heartIcon.classList.add('fas');
+    }
+
+    // Double-click on image → add to wishlist + show animation
+    wrapper.addEventListener('dblclick', () => {
+      // Get artwork data
+      const artwork = {
+        title: card.querySelector('.art-title').textContent.trim(),
+        artist: card.querySelector('.artist-name').childNodes[0].textContent.trim(),
+        img: img.src,
+        gallery: card.querySelector('.art-gallery').textContent.trim(),
+        price: card.querySelector('.art-price').textContent.trim()
+      };
+
+      // Check if already liked
+      if (!likeIcon.classList.contains('liked')) {
+        // Add to wishlist
+        addToWishlist(artwork);
+        
+        // Update heart icon to liked state
+        likeIcon.classList.add('liked');
+        heartIcon.classList.remove('far');
+        heartIcon.classList.add('fas');
+      }
+
+      // Show heart animation
+      heart.classList.add('animate');
+      heart.addEventListener('animationend', () => {
+        heart.classList.remove('animate');
+      }, { once: true });
+    });
+
+    // Click small heart → toggle wishlist
+    likeIcon.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      const artwork = {
+        title: card.querySelector('.art-title').textContent.trim(),
+        artist: card.querySelector('.artist-name').childNodes[0].textContent.trim(),
+        img: img.src,
+        gallery: card.querySelector('.art-gallery').textContent.trim(),
+        price: card.querySelector('.art-price').textContent.trim()
+      };
+
+      if (likeIcon.classList.contains('liked')) {
+        // Remove from wishlist
+        removeFromWishlist(artwork.img);
+        likeIcon.classList.remove('liked');
+        heartIcon.classList.remove('fas');
+        heartIcon.classList.add('far');
+      } else {
+        // Add to wishlist
+        addToWishlist(artwork);
+        likeIcon.classList.add('liked');
+        heartIcon.classList.remove('far');
+        heartIcon.classList.add('fas');
+      }
+    });
+  });
+
+  // Search functionality
+  const navSearch = document.getElementById('navSearch');
+  
+  function runSearch(keyword) {
+    keyword = keyword.toLowerCase();
+    let firstMatch = null;
+    const artCards = document.querySelectorAll('.artsy-card');
+
+    artCards.forEach(card => {
+      const artistName = card.querySelector('.artist-name').textContent.toLowerCase();
+      const artTitle = card.querySelector('.art-title').textContent.toLowerCase();
+
+      if (keyword && (artistName.includes(keyword) || artTitle.includes(keyword))) {
+        card.classList.add("highlight");
+        card.classList.remove("dim");
+        if (!firstMatch) firstMatch = card;
+      } else if (keyword) {
+        card.classList.add("dim");
+        card.classList.remove("highlight");
+      } else {
+        card.classList.remove("highlight", "dim");
+      }
+    });
+
+    if (firstMatch) firstMatch.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  navSearch.addEventListener('input', (e) => runSearch(e.target.value));
+
+  // Filter sidebar functionality
+  const openBtn = document.getElementById('openSidebar');
+  const closeBtn = document.getElementById('closeSidebar');
+  const sidebar = document.getElementById('filterSidebar');
+  const overlay = document.getElementById('overlay');
+
+  if (openBtn) {
+    openBtn.addEventListener('click', () => {
+      sidebar.classList.add('open');
+      overlay.classList.add('show');
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('show');
+    });
+  }
+
+  if (overlay) {
+    overlay.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('show');
+    });
+  }
 });
+
+// Listen for storage changes from wishlist page
+window.addEventListener('storage', (e) => {
+  if (e.key === 'wishlist') {
+    updateWishlistCount();
+    
+    // Update heart icons based on new wishlist state
+    const updatedWishlist = getWishlistFromStorage();
+    document.querySelectorAll('.artsy-card').forEach(card => {
+      const img = card.querySelector('img');
+      const likeIcon = card.querySelector('.like-icon');
+      const heartIcon = likeIcon.querySelector('i');
+      
+      const isLiked = updatedWishlist.some(item => 
+        (item.imgSrc || item.img) === img.src
+      );
+      
+      if (isLiked) {
+        likeIcon.classList.add('liked');
+        heartIcon.classList.remove('far');
+        heartIcon.classList.add('fas');
+      } else {
+        likeIcon.classList.remove('liked');
+        heartIcon.classList.remove('fas');
+        heartIcon.classList.add('far');
+      }
+    });
+  }
+});
+
+// Update count when page becomes visible
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) {
+    updateWishlistCount();
+  }
+});
+
+// Make functions available globally
+window.removeFromWishlist = removeFromWishlist;
 
 
 // Automatic fill the newsletter email
