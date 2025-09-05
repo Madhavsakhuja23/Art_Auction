@@ -48,6 +48,20 @@ body {
   justify-content: center;
   align-items: center;
 }
+    .close-btn {
+      position: absolute;
+      top: 22px;
+      right: 20px;
+      font-size: 32px;
+      color: #5a4632; /* brown */
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .close-btn:hover {
+      color: #3b2a1d; /* darker brown on hover */
+    }
 
 #outer {
   width: 80%;
