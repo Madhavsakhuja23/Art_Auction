@@ -323,13 +323,13 @@ function showAddMessage(title) {
     position: fixed;
     top: 100px;
     right: 20px;
-    background: #4CAF50;
+    background: #694e39;
     color: white;
     padding: 1rem 2rem;
     border-radius: 25px;
     z-index: 9999;
     animation: slideIn 0.3s ease;
-    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   `;
   
   message.innerHTML = `
@@ -578,4 +578,5 @@ function sendEmail(e){
     .catch(err=>console.log(err));
 }
 document.getElementById("footer-newsletter").addEventListener("submit", sendEmail);
+
 
